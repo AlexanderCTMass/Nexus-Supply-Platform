@@ -273,234 +273,9 @@
         .close-modal:hover {
             color: var(--dark-text);
         }
-        
-        /* Стили для режима презентации */
-        .presentation-mode {
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            height: 100vh;
-        }
-        
-        .presentation-mode section {
-            scroll-snap-align: start;
-            min-height: 100vh;
-            padding-top: 80px;
-            padding-bottom: 80px;
-        }
-        
-        .presentation-controls {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1001;
-            display: flex;
-            gap: 10px;
-            background: white;
-            border-radius: 50px;
-            padding: 10px 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-        
-        .presentation-controls.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .presentation-controls button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .presentation-controls button:hover {
-            background: #1D4ED8;
-            transform: scale(1.1);
-        }
-        
-        .presentation-controls button:active {
-            transform: scale(0.95);
-        }
-        
-        .slide-indicator {
-            position: fixed;
-            top: 100px;
-            right: 30px;
-            z-index: 1001;
-            background: white;
-            border-radius: 20px;
-            padding: 10px 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            font-weight: 600;
-            display: none;
-        }
-        
-        .presentation-mode .slide-indicator {
-            display: block;
-        }
-        
-        .presentation-mode header {
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .presentation-mode header:hover {
-            transform: translateY(0);
-        }
-        
-        /* Переключатель режимов */
-        .mode-switcher {
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            z-index: 1000;
-            background: white;
-            border-radius: 50px;
-            padding: 8px 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        
-        .mode-switcher button {
-            padding: 8px 20px;
-            border-radius: 25px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .mode-switcher button.active {
-            background: var(--primary-color);
-            color: white;
-        }
-        
-        .presentation-mode .mode-switcher {
-            top: 20px;
-            right: 20px;
-        }
-        
-        /* Стили для режима презентации - скрываем некоторые элементы */
-        .presentation-mode .hide-in-presentation {
-            display: none;
-        }
-        
-        .presentation-mode .presentation-only {
-            display: block;
-        }
-        
-        /* Кнопки навигации слайдов */
-        .slide-nav {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 60px;
-            background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
-            z-index: 999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .presentation-mode .slide-nav {
-            display: flex;
-        }
-        
-        .slide-nav button {
-            padding: 10px 30px;
-            border-radius: 25px;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .slide-nav button:hover {
-            background: #1D4ED8;
-            transform: translateY(-2px);
-        }
-        
-        /* Индикатор прогресса */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: #e5e7eb;
-            z-index: 1002;
-            display: none;
-        }
-        
-        .presentation-mode .progress-bar {
-            display: block;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-color);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
     </style>
 </head>
 <body class="gradient-bg">
-    <!-- Переключатель режимов -->
-    <div class="mode-switcher">
-        <button id="siteMode" class="active">
-            <i class="fas fa-globe mr-2"></i>Сайт
-        </button>
-        <button id="presentationMode">
-            <i class="fas fa-desktop mr-2"></i>Презентация
-        </button>
-    </div>
-    
-    <!-- Индикатор прогресса -->
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
-    
-    <!-- Индикатор слайда -->
-    <div class="slide-indicator" id="slideIndicator">
-        Слайд <span id="currentSlide">1</span> из <span id="totalSlides">8</span>
-    </div>
-    
-    <!-- Панель управления презентацией -->
-    <div class="presentation-controls" id="presentationControls">
-        <button id="prevSlide" title="Предыдущий слайд (←)">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button id="nextSlide" title="Следующий слайд (→)">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-        <button id="fullscreen" title="Полный экран (F)">
-            <i class="fas fa-expand"></i>
-        </button>
-        <button id="exitPresentation" title="Выйти из презентации (ESC)">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    
     <!-- Навигация -->
     <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -517,14 +292,9 @@
                 </nav>
             </div>
             <div class="flex items-center space-x-4">
-                <!-- Ссылка на White Paper -->
-                <a href="white-paper.html" target="_blank" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium hidden md:inline-block">
+                <button id="downloadWhitePaper" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium hidden md:inline-block">
                     <i class="fas fa-download mr-2"></i>White Paper
-                </a>
-                <!-- Ссылка на Pitch Deck -->
-                <a href="pitch-deck.html" target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hidden md:inline-block hover:bg-purple-700 transition">
-                    <i class="fas fa-presentation-screen mr-2"></i>Pitch Deck
-                </a>
+                </button>
                 <button id="demoAccess" class="btn-accent px-4 py-2 rounded-lg text-sm font-medium">
                     <i class="fas fa-play-circle mr-2"></i>Демо
                 </button>
@@ -544,25 +314,12 @@
                 <a href="#finance" class="block text-gray-600 hover:text-blue-600 transition py-2">Финансы</a>
                 <a href="#team" class="block text-gray-600 hover:text-blue-600 transition py-2">Команда</a>
                 <a href="#contact" class="block text-gray-600 hover:text-blue-600 transition py-2">Контакты</a>
-                <a href="white-paper.html" target="_blank" class="btn-primary w-full py-3 rounded-lg font-medium mt-4">
-                    <i class="fas fa-download mr-2"></i>White Paper
-                </a>
-                <a href="pitch-deck.html" target="_blank" class="bg-purple-600 text-white w-full py-3 rounded-lg font-medium text-center block">
-                    <i class="fas fa-presentation-screen mr-2"></i>Pitch Deck
-                </a>
+                <button id="downloadWhitePaperMobile" class="btn-primary w-full py-3 rounded-lg font-medium mt-4">
+                    <i class="fas fa-download mr-2"></i>Скачать White Paper
+                </button>
             </div>
         </div>
     </header>
-    
-    <!-- Навигация слайдов (для режима презентации) -->
-    <div class="slide-nav">
-        <button id="slidePrev">
-            <i class="fas fa-arrow-left"></i> Назад
-        </button>
-        <button id="slideNext">
-            Вперед <i class="fas fa-arrow-right"></i>
-        </button>
-    </div>
 
     <!-- Герой-секция -->
     <section id="hero" class="section-padding pt-24 md:pt-32">
@@ -601,10 +358,9 @@
                     <button id="watchPresentation" class="btn-primary px-8 py-4 rounded-lg font-bold text-lg">
                         <i class="fas fa-play-circle mr-2"></i>Смотреть презентацию
                     </button>
-                    <!-- Ссылка на White Paper -->
-                    <a href="white-paper.html" target="_blank" class="bg-white border border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition inline-flex items-center">
+                    <button id="downloadWP" class="bg-white border border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition">
                         <i class="fas fa-file-pdf mr-2"></i>Скачать White Paper
-                    </a>
+                    </button>
                     <button id="requestDemo" class="btn-accent px-8 py-4 rounded-lg font-bold text-lg">
                         <i class="fas fa-calendar-alt mr-2"></i>Запросить демо
                     </button>
@@ -1400,9 +1156,9 @@
                                 <div>
                                     <div class="font-bold text-lg">Полный White Paper</div>
                                     <div class="text-gray-600 mb-2">Детальное описание проекта, рынка и финансовой модели (15 стр.)</div>
-                                    <a href="white-paper.html" target="_blank" class="btn-primary px-4 py-2 rounded-lg text-sm inline-flex items-center">
-                                        <i class="fas fa-download mr-2"></i>Скачать White Paper
-                                    </a>
+                                    <button id="downloadFullWP" class="btn-primary px-4 py-2 rounded-lg text-sm">
+                                        <i class="fas fa-download mr-2"></i>Скачать PDF
+                                    </button>
                                 </div>
                             </div>
                             
@@ -1413,9 +1169,9 @@
                                 <div>
                                     <div class="font-bold text-lg">Pitch Deck для встречи</div>
                                     <div class="text-gray-600 mb-2">Презентация для инвесторов (10 слайдов)</div>
-                                    <a href="pitch-deck.html" target="_blank" class="btn-accent px-4 py-2 rounded-lg text-sm inline-flex items-center">
-                                        <i class="fas fa-eye mr-2"></i>Посмотреть Pitch Deck
-                                    </a>
+                                    <button id="requestPitchDeck" class="btn-accent px-4 py-2 rounded-lg text-sm">
+                                        <i class="fas fa-envelope mr-2"></i>Запросить на email
+                                    </button>
                                 </div>
                             </div>
                             
@@ -1462,7 +1218,7 @@
                 </div>
                 
                 <!-- Футер -->
-                <footer class="border-t border-gray-200 pt-8 mt-8 hide-in-presentation">
+                <footer class="border-t border-gray-200 pt-8 mt-8">
                     <div class="flex flex-col md:flex-row justify-between items-center">
                         <div class="mb-4 md:mb-0">
                             <div class="text-2xl font-bold text-blue-600">Nexus Supply Platform</div>
@@ -1520,261 +1276,7 @@
             
             // Инициализация формы
             initForm();
-            
-            // Инициализация режима презентации
-            initPresentationMode();
         });
-        
-        // Переменные для режима презентации
-        let isPresentationMode = false;
-        let currentSlide = 0;
-        let slides = [];
-        
-        // Инициализация режима презентации
-        function initPresentationMode() {
-            // Собираем все секции-слайды
-            slides = [
-                'hero', 'problem', 'solution', 'market', 'ai', 'finance', 'team', 'contact'
-            ];
-            
-            // Обновляем индикатор слайдов
-            document.getElementById('totalSlides').textContent = slides.length;
-            
-            // Переключатель режимов
-            const siteModeBtn = document.getElementById('siteMode');
-            const presentationModeBtn = document.getElementById('presentationMode');
-            
-            siteModeBtn.addEventListener('click', function() {
-                setPresentationMode(false);
-            });
-            
-            presentationModeBtn.addEventListener('click', function() {
-                setPresentationMode(true);
-            });
-            
-            // Кнопки управления презентацией
-            const prevSlideBtn = document.getElementById('prevSlide');
-            const nextSlideBtn = document.getElementById('nextSlide');
-            const slidePrevBtn = document.getElementById('slidePrev');
-            const slideNextBtn = document.getElementById('slideNext');
-            const fullscreenBtn = document.getElementById('fullscreen');
-            const exitPresentationBtn = document.getElementById('exitPresentation');
-            
-            if (prevSlideBtn) prevSlideBtn.addEventListener('click', goToPrevSlide);
-            if (nextSlideBtn) nextSlideBtn.addEventListener('click', goToNextSlide);
-            if (slidePrevBtn) slidePrevBtn.addEventListener('click', goToPrevSlide);
-            if (slideNextBtn) slideNextBtn.addEventListener('click', goToNextSlide);
-            
-            if (fullscreenBtn) {
-                fullscreenBtn.addEventListener('click', toggleFullscreen);
-            }
-            
-            if (exitPresentationBtn) {
-                exitPresentationBtn.addEventListener('click', function() {
-                    setPresentationMode(false);
-                });
-            }
-            
-            // Обработка клавиатуры
-            document.addEventListener('keydown', function(e) {
-                if (!isPresentationMode) return;
-                
-                switch(e.key) {
-                    case 'ArrowLeft':
-                    case 'ArrowUp':
-                    case ' ':
-                    case 'PageUp':
-                        e.preventDefault();
-                        goToPrevSlide();
-                        break;
-                    case 'ArrowRight':
-                    case 'ArrowDown':
-                    case 'Enter':
-                    case 'PageDown':
-                        e.preventDefault();
-                        goToNextSlide();
-                        break;
-                    case 'Escape':
-                        e.preventDefault();
-                        setPresentationMode(false);
-                        break;
-                    case 'f':
-                    case 'F':
-                        if (e.ctrlKey || e.metaKey) return;
-                        e.preventDefault();
-                        toggleFullscreen();
-                        break;
-                    case 'Home':
-                        e.preventDefault();
-                        goToSlide(0);
-                        break;
-                    case 'End':
-                        e.preventDefault();
-                        goToSlide(slides.length - 1);
-                        break;
-                }
-            });
-            
-            // Обработка прокрутки в режиме презентации
-            let isScrolling = false;
-            document.addEventListener('wheel', function(e) {
-                if (!isPresentationMode || isScrolling) return;
-                
-                isScrolling = true;
-                
-                if (e.deltaY > 0) {
-                    goToNextSlide();
-                } else if (e.deltaY < 0) {
-                    goToPrevSlide();
-                }
-                
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 500);
-            }, { passive: false });
-            
-            // Обработка свайпов на мобильных устройствах
-            let touchStartX = 0;
-            let touchStartY = 0;
-            
-            document.addEventListener('touchstart', function(e) {
-                if (!isPresentationMode) return;
-                
-                touchStartX = e.changedTouches[0].screenX;
-                touchStartY = e.changedTouches[0].screenY;
-            }, { passive: true });
-            
-            document.addEventListener('touchend', function(e) {
-                if (!isPresentationMode) return;
-                
-                const touchEndX = e.changedTouches[0].screenX;
-                const touchEndY = e.changedTouches[0].screenY;
-                
-                const diffX = touchStartX - touchEndX;
-                const diffY = touchStartY - touchEndY;
-                
-                // Если горизонтальный свайп сильнее вертикального
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (diffX > 50) {
-                        goToNextSlide();
-                    } else if (diffX < -50) {
-                        goToPrevSlide();
-                    }
-                }
-            }, { passive: true });
-        }
-        
-        // Установка режима презентации
-        function setPresentationMode(enable) {
-            isPresentationMode = enable;
-            const body = document.body;
-            const presentationControls = document.getElementById('presentationControls');
-            const siteModeBtn = document.getElementById('siteMode');
-            const presentationModeBtn = document.getElementById('presentationMode');
-            
-            if (enable) {
-                body.classList.add('presentation-mode');
-                presentationControls.classList.add('visible');
-                siteModeBtn.classList.remove('active');
-                presentationModeBtn.classList.add('active');
-                
-                // Прокручиваем к текущему слайду
-                goToSlide(currentSlide);
-                
-                // Обновляем прогресс
-                updateProgress();
-                
-                // Показываем панель управления через 3 секунды, если не взаимодействуем
-                setTimeout(() => {
-                    if (isPresentationMode && !document.querySelector(':hover')?.closest('.presentation-controls')) {
-                        presentationControls.style.opacity = '0.5';
-                    }
-                }, 3000);
-                
-                // Показываем панель при наведении
-                presentationControls.addEventListener('mouseenter', function() {
-                    this.style.opacity = '1';
-                });
-                
-                presentationControls.addEventListener('mouseleave', function() {
-                    if (isPresentationMode) {
-                        this.style.opacity = '0.5';
-                    }
-                });
-            } else {
-                body.classList.remove('presentation-mode');
-                presentationControls.classList.remove('visible');
-                siteModeBtn.classList.add('active');
-                presentationModeBtn.classList.remove('active');
-                presentationControls.style.opacity = '1';
-            }
-        }
-        
-        // Переход к предыдущему слайду
-        function goToPrevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                goToSlide(currentSlide);
-            }
-        }
-        
-        // Переход к следующему слайду
-        function goToNextSlide() {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                goToSlide(currentSlide);
-            }
-        }
-        
-        // Переход к конкретному слайду
-        function goToSlide(slideIndex) {
-            if (slideIndex < 0 || slideIndex >= slides.length) return;
-            
-            currentSlide = slideIndex;
-            const slideId = slides[slideIndex];
-            const slideElement = document.getElementById(slideId);
-            
-            if (slideElement) {
-                slideElement.scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            // Обновляем индикатор
-            document.getElementById('currentSlide').textContent = currentSlide + 1;
-            
-            // Обновляем прогресс
-            updateProgress();
-            
-            // Показываем панель управления
-            const presentationControls = document.getElementById('presentationControls');
-            presentationControls.style.opacity = '1';
-            
-            // Скрываем через 3 секунды, если не навели
-            clearTimeout(window.presentationControlsTimeout);
-            window.presentationControlsTimeout = setTimeout(() => {
-                if (isPresentationMode && !document.querySelector(':hover')?.closest('.presentation-controls')) {
-                    presentationControls.style.opacity = '0.5';
-                }
-            }, 3000);
-        }
-        
-        // Обновление прогресс-бара
-        function updateProgress() {
-            const progress = ((currentSlide + 1) / slides.length) * 100;
-            document.getElementById('progressFill').style.width = `${progress}%`;
-        }
-        
-        // Переключение полноэкранного режима
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log(`Ошибка при включении полноэкранного режима: ${err.message}`);
-                });
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
-        }
         
         // Анимации появления элементов при скролле
         function initScrollAnimations() {
@@ -2075,18 +1577,35 @@
                             top: targetPosition,
                             behavior: 'smooth'
                         });
-                        
-                        // В режиме презентации обновляем текущий слайд
-                        if (isPresentationMode) {
-                            const slideIndex = slides.indexOf(targetId);
-                            if (slideIndex !== -1) {
-                                currentSlide = slideIndex;
-                                document.getElementById('currentSlide').textContent = currentSlide + 1;
-                                updateProgress();
-                            }
-                        }
                     }
                 });
+            });
+            
+            // Обработчики для кнопок загрузки документов
+            const downloadButtons = [
+                'downloadWhitePaper', 'downloadWhitePaperMobile', 'downloadWP', 'downloadFullWP'
+            ];
+            
+            downloadButtons.forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        showModal('White Paper', `
+                            <h3 class="text-xl font-bold mb-4">Nexus Supply Platform: White Paper</h3>
+                            <p class="mb-4">Документ готов к скачиванию. Нажмите кнопку ниже, чтобы сохранить PDF-файл.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <div class="font-bold">Информация о документе:</div>
+                                <div>• Формат: PDF</div>
+                                <div>• Страниц: 15</div>
+                                <div>• Размер: ~2.5 MB</div>
+                                <div>• Версия: 2.0 (Декабрь 2025)</div>
+                            </div>
+                            <button id="mockDownload" class="btn-primary w-full py-3 rounded-lg font-medium">
+                                <i class="fas fa-download mr-2"></i>Скачать White Paper (PDF)
+                            </button>
+                        `);
+                    });
+                }
             });
             
             // Обработчики для кнопок демо
@@ -2128,6 +1647,36 @@
                 }
             });
             
+            // Обработчик для кнопки Pitch Deck
+            const pitchDeckBtn = document.getElementById('requestPitchDeck');
+            if (pitchDeckBtn) {
+                pitchDeckBtn.addEventListener('click', function() {
+                    showModal('Pitch Deck', `
+                        <h3 class="text-xl font-bold mb-4">Запросить Pitch Deck</h3>
+                        <p class="mb-4">Мы отправим презентацию для инвесторов на ваш email. Пожалуйста, укажите адрес электронной почты.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Ваше имя</label>
+                                <input type="text" class="form-input" placeholder="Имя Фамилия">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" class="form-input" placeholder="email@example.com">
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <div class="font-bold">Информация о презентации:</div>
+                                <div>• Формат: PDF</div>
+                                <div>• Слайдов: 10</div>
+                                <div>• Размер: ~1.8 MB</div>
+                            </div>
+                            <button class="btn-accent w-full py-3 rounded-lg font-medium">
+                                <i class="fas fa-envelope mr-2"></i>Отправить Pitch Deck на email
+                            </button>
+                        </div>
+                    `);
+                });
+            }
+            
             // Модальное окно
             const modal = document.getElementById('documentModal');
             const closeModalBtn = document.querySelector('.close-modal');
@@ -2156,11 +1705,11 @@
                 modalContent.innerHTML = content;
                 modal.style.display = 'flex';
                 
-                // Обработчик для кнопки отправки в модальном окне
-                const submitBtn = modalContent.querySelector('button');
-                if (submitBtn) {
-                    submitBtn.addEventListener('click', function() {
-                        alert('В реальном проекте здесь происходила бы отправка формы. Для демо-версии это имитация.');
+                // Обработчик для кнопки скачивания в модальном окне
+                const mockDownloadBtn = document.getElementById('mockDownload');
+                if (mockDownloadBtn) {
+                    mockDownloadBtn.addEventListener('click', function() {
+                        alert('В реальном проекте здесь происходило бы скачивание PDF-файла. Для демо-версии это имитация.');
                         modal.style.display = 'none';
                     });
                 }
