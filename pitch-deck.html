@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Deck: Nexus Supply Platform — Цифровая экосистема для автоматизации B2B2C</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        
+        .slide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .slide {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .slide-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #3b82f6;
+        }
+        
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.5rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #dbeafe;
+        }
+        
+        .metric-highlight {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #1e40af;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        
+        .metric-label {
+            font-size: 1.25rem;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .problem-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .problem-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+        
+        .problem-card:nth-child(2) {
+            background: linear-gradient(135deg, #fce7f3 0%, #fdf2f8 100%);
+            border-left-color: #db2777;
+        }
+        
+        .problem-card:nth-child(3) {
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            border-left-color: #3b82f6;
+        }
+        
+        .solution-architecture {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .solution-box {
+            background: white;
+            border: 2px solid #3b82f6;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            width: 220px;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+        }
+        
+        .solution-box:nth-child(2) {
+            background: #eff6ff;
+            border-color: #10b981;
+        }
+        
+        .solution-arrow {
+            font-size: 2rem;
+            color: #6b7280;
+            margin: 0 1rem;
+        }
+        
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .market-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .market-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .comparison-table th {
+            background-color: #3b82f6;
+            color: white;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .team-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+        
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.25rem;
+        }
+        
+        .team-role {
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #3b82f6;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #3b82f6;
+            border-radius: 50%;
+            top: 1.5rem;
+        }
+        
+        .timeline-item:nth-child(odd):before {
+            right: -12px;
+        }
+        
+        .timeline-item:nth-child(even):before {
+            left: -12px;
+        }
+        
+        .timeline-year {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-metric {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .key-metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-metric-label {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+        
+        .roi-calculation {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .roi-title {
+            font-weight: 700;
+            color: #0ea5e9;
+            margin-bottom: 1rem;
+        }
+        
+        .roi-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .roi-total {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #10b981;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .nav-container {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        
+        .nav-dot {
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: #9ca3af;
+            border-radius: 50%;
+            margin: 0.75rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-dot.active {
+            background-color: #3b82f6;
+            transform: scale(1.3);
+        }
+        
+        .footer-note {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1.5rem;
+            }
+            
+            .slide-title {
+                font-size: 2rem;
+            }
+            
+            .solution-architecture {
+                flex-direction: column;
+            }
+            
+            .solution-arrow {
+                margin: 1rem 0;
+                transform: rotate(90deg);
+            }
+            
+            .timeline:before {
+                left: 0;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 2rem;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-left: 2rem;
+            }
+            
+            .timeline-item:before {
+                left: -10px;
+            }
+            
+            .timeline-item:nth-child(odd):before {
+                right: auto;
+                left: -10px;
+            }
+            
+            .nav-container {
+                display: none;
+            }
+        }
+        
+        .ai-roadmap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .ai-phase {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .ai-phase-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+        
+        .competition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .competition-table th {
+            background-color: #10b981;
+            color: white;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .competition-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+        
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .investment-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .investment-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+            margin: 2rem 0;
+        }
+        
+        .pagination {
+            text-align: center;
+            margin-top: 2rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационные точки -->
+    <div class="nav-container">
+        <span class="nav-dot active" data-slide="1"></span>
+        <span class="nav-dot" data-slide="2"></span>
+        <span class="nav-dot" data-slide="3"></span>
+        <span class="nav-dot" data-slide="4"></span>
+        <span class="nav-dot" data-slide="5"></span>
+        <span class="nav-dot" data-slide="6"></span>
+        <span class="nav-dot" data-slide="7"></span>
+        <span class="nav-dot" data-slide="8"></span>
+        <span class="nav-dot" data-slide="9"></span>
+        <span class="nav-dot" data-slide="10"></span>
+        <span class="nav-dot" data-slide="11"></span>
+        <span class="nav-dot" data-slide="12"></span>
+        <span class="nav-dot" data-slide="13"></span>
+        <span class="nav-dot" data-slide="14"></span>
+        <span class="nav-dot" data-slide="15"></span>
+    </div>
+    
+    <div class="slide-container">
+        <!-- Слайд 1: Титульный слайд -->
+        <div id="slide1" class="slide">
+            <div class="slide-header">
+                <h1 class="slide-title">Nexus Supply Platform</h1>
+                <p class="slide-subtitle">Цифровая экосистема для автоматизации цепочки<br>«Поставщик → Дилер → Клиент»</p>
+            </div>
+            
+            <div style="text-align: center; margin: 3rem 0;">
+                <div class="metric-highlight">50%</div>
+                <div class="metric-label">Сокращение операционных издержек</div>
+                
+                <div class="metric-highlight">8×</div>
+                <div class="metric-label">Ускорение обработки заказов</div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: #6b7280; font-size: 1rem;">Декабрь 2025</p>
+            </div>
+            
+            <div class="pagination">Слайд 1 из 15</div>
+        </div>
+        
+        <!-- Слайд 2: Проблема рынка -->
+        <div id="slide2" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Проблема рынка</h2>
+                <p class="slide-subtitle">B2C автоматизирован, B2B — нет</p>
+            </div>
+            
+            <div class="problem-columns">
+                <div class="problem-card">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: #92400e;">Для поставщика</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">60% времени менеджеров — рутина</li>
+                        <li style="margin-bottom: 0.5rem;">15% ошибок в заказах</li>
+                        <li>Хаос в прайс-листах</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-card">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: #9d174d;">Для дилера</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">Конверсия 5-7%</li>
+                        <li style="margin-bottom: 0.5rem;">Нет своего сайта</li>
+                        <li>2-4 часа на 1 заказ</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-card">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: #1e40af;">Для клиента</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">Непрозрачные сроки</li>
+                        <li style="margin-bottom: 0.5rem;">Неактуальные цены</li>
+                        <li>Снижение лояльности</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="key-metric">
+                <div class="key-metric-value">30%</div>
+                <div class="key-metric-label">Системные потери потенциальной прибыли участников цепочки</div>
+            </div>
+            
+            <div class="pagination">Слайд 2 из 15</div>
+        </div>
+        
+        <!-- Слайд 3: Решение -->
+        <div id="slide3" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Решение</h2>
+                <p class="slide-subtitle">Единая B2B2C-экосистема вместо разрозненных инструментов</p>
+            </div>
+            
+            <div class="solution-architecture">
+                <div class="solution-box">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: #1e40af;">Supplier Hub</h3>
+                    <p style="color: #6b7280;">Для поставщиков</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem;">
+                        <div style="margin-bottom: 0.25rem;">✓ Автообновление каталога</div>
+                        <div style="margin-bottom: 0.25rem;">✓ Управление дилерами в 1 клик</div>
+                        <div>✓ Аналитика</div>
+                    </div>
+                </div>
+                
+                <div class="solution-arrow">⇄</div>
+                
+                <div class="solution-box">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: #10b981;">Dealer Platform</h3>
+                    <p style="color: #6b7280;">Для дилеров</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem;">
+                        <div style="margin-bottom: 0.25rem;">✓ Готовый сайт за 1 день</div>
+                        <div style="margin-bottom: 0.25rem;">✓ AI-ценообразование</div>
+                        <div>✓ Заказы в 1 клик</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <div style="font-size: 1.25rem; color: #4b5563; margin-bottom: 0.5rem;">↓</div>
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; display: inline-block;">
+                    <div style="font-weight: 600; color: #1e40af;">Сайт дилера → Клиент</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Автоматически генерируемый интернет-магазин с актуальными ценами</div>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 3 из 15</div>
+        </div>
+        
+        <!-- Слайд 4: Рынок -->
+        <div id="slide4" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Рынок</h2>
+                <p class="slide-subtitle">Рынок 65 трлн ₽, который ждет цифровизации</p>
+            </div>
+            
+            <div class="market-grid">
+                <div class="market-card">
+                    <div class="market-value">65.8 трлн ₽</div>
+                    <div>Объем B2B/B2G онлайн-закупок в 2025</div>
+                    <div style="margin-top: 0.5rem; color: #6b7280; font-size: 0.9rem;">36.8% ВВП России</div>
+                </div>
+                
+                <div class="market-card">
+                    <div class="market-value">154.7 трлн ₽</div>
+                    <div>Прогноз к 2030 году</div>
+                    <div style="margin-top: 0.5rem; color: #6b7280; font-size: 0.9rem;">Рост в 2.3 раза, CAGR 15-17%</div>
+                </div>
+                
+                <div class="market-card">
+                    <div class="market-value">20%</div>
+                    <div>Средних компаний автоматизировали закупки</div>
+                    <div style="margin-top: 0.5rem; color: #6b7280; font-size: 0.9rem;">Огромный потенциал роста</div>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Наша ниша (SOM)</h3>
+            
+            <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 0.75rem; margin-top: 1rem;">
+                <div style="text-align: center; font-size: 1.5rem; font-weight: 700; color: #0ea5e9; margin-bottom: 0.5rem;">500-1000 компаний</div>
+                <div style="text-align: center; color: #4b5563;">
+                    в нишевых вертикалях (стройматериалы, сантехника, промышленные товары) в первые 2-3 года
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding: 1rem; background: #fef3c7; border-radius: 0.5rem; border-left: 4px solid #f59e0b;">
+                <div style="font-weight: 600; color: #92400e;">Окно возможностей:</div>
+                <div style="color: #92400e; margin-top: 0.25rem;">
+                    Уход международных IT-решений + государственный курс на импортозамещение в корпоративном IT
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 4 из 15</div>
+        </div>
+        
+        <!-- Слайд 5: Продукт -->
+        <div id="slide5" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Продукт</h2>
+                <p class="slide-subtitle">Две платформы, один результат</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div>
+                    <h3 class="section-title">1. Supplier Hub</h3>
+                    <p style="color: #6b7280; margin-bottom: 1rem;">Для поставщиков</p>
+                    
+                    <ul style="margin-left: 1rem;">
+                        <li style="margin-bottom: 0.75rem;">
+                            <span style="font-weight: 600; color: #1e40af;">Централизованное управление дилерами</span><br>
+                            <span style="color: #6b7280; font-size: 0.9rem;">«Одно-кликовое» добавление партнеров</span>
+                        </li>
+                        <li style="margin-bottom: 0.75rem;">
+                            <span style="font-weight: 600; color: #1e40af;">Автообновление каталога</span><br>
+                            <span style="color: #6b7280; font-size: 0.9rem;">API для 1С, МойСклад, Галактика</span>
+                        </li>
+                        <li>
+                            <span style="font-weight: 600; color: #1e40af;">Аналитика по дилерам и товарам</span><br>
+                            <span style="color: #6b7280; font-size: 0.9rem;">Дашборды, метрики эффективности</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="section-title">2. Dealer Platform</h3>
+                    <p style="color: #6b7280; margin-bottom: 1rem;">Для дилеров</p>
+                    
+                    <ul style="margin-left: 1rem;">
+                        <li style="margin-bottom: 0.75rem;">
+                            <span style="font-weight: 600; color: #10b981;">Автоматически генерируемый интернет-магазин</span><br>
+                            <span style="color: #6b7280; font-size: 0.9rem;">За 1 день, без затрат на IT</span>
+                        </li>
+                        <li style="margin-bottom: 0.75rem;">
+                            <span style="font-weight: 600; color: #10b981;">AI-ценообразование</span><br>
+                            <span style="color: #6b7280; font-size: 0.9rem;">Динамические наценки 18-42%</span>
+                        </li>
+                        <li>
+                            <span style="font-weight: 600; color: #10b981;">Сквозные заказы</span><br>
+                            <span style="color: #6b7280; font-size: 0.9rem;">С Telegram-уведомлениями</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="section-title" style="margin-top: 2rem;">Технологическое ядро</h3>
+            
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 1rem;">
+                <div style="text-align: center; padding: 1rem; flex: 1; min-width: 150px;">
+                    <div style="font-size: 1.5rem; color: #3b82f6; margin-bottom: 0.5rem;"><i class="fas fa-bolt"></i></div>
+                    <div style="font-weight: 600;">Real-time синхронизация</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Задержка < 5 минут</div>
+                </div>
+                
+                <div style="text-align: center; padding: 1rem; flex: 1; min-width: 150px;">
+                    <div style="font-size: 1.5rem; color: #3b82f6; margin-bottom: 0.5rem;"><i class="fas fa-code"></i></div>
+                    <div style="font-weight: 600;">Открытое API</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Интеграция с любыми системами</div>
+                </div>
+                
+                <div style="text-align: center; padding: 1rem; flex: 1; min-width: 150px;">
+                    <div style="font-size: 1.5rem; color: #3b82f6; margin-bottom: 0.5rem;"><i class="fas fa-sync-alt"></i></div>
+                    <div style="font-weight: 600;">Модульная архитектура</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Под AI и масштабирование</div>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 5 из 15</div>
+        </div>
+        
+        <!-- Слайд 6: AI-стратегия -->
+        <div id="slide6" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">AI-стратегия</h2>
+                <p class="slide-subtitle">AI — не фича, а следующий эволюционный этап</p>
+            </div>
+            
+            <div class="ai-roadmap">
+                <div class="ai-phase">
+                    <div class="ai-phase-circle" style="background-color: #dbeafe;">1</div>
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">2025</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Data Foundation<br>Сбор данных</div>
+                </div>
+                
+                <div class="ai-phase">
+                    <div class="ai-phase-circle" style="background-color: #dcfce7;">2</div>
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">2025-2026</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Операционный AI<br>Автоматизация рутины</div>
+                </div>
+                
+                <div class="ai-phase">
+                    <div class="ai-phase-circle" style="background-color: #fef3c7;">3</div>
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">2026-2027</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Предиктивный AI<br>Прогнозы и оптимизация</div>
+                </div>
+                
+                <div class="ai-phase">
+                    <div class="ai-phase-circle" style="background-color: #fce7f3;">4</div>
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">2027+</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Автономная экосистема</div>
+                </div>
+            </div>
+            
+            <h3 class="section-title" style="margin-top: 2rem;">Динамическое ценообразование</h3>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin: 1.5rem 0;">
+                <div style="text-align: center; flex: 1; min-width: 200px; padding: 1rem;">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">До AI</div>
+                    <div style="color: #6b7280; margin-bottom: 0.5rem;">Фиксированная наценка</div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #6b7280;">25%</div>
+                </div>
+                
+                <div style="text-align: center; flex: 1; min-width: 200px; padding: 1rem;">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">С AI</div>
+                    <div style="color: #6b7280; margin-bottom: 0.5rem;">Динамический диапазон</div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #10b981;">18-42%</div>
+                </div>
+            </div>
+            
+            <div class="roi-calculation" style="text-align: center;">
+                <div class="roi-title">Результат</div>
+                <div style="font-size: 2rem; font-weight: 800; color: #10b981;">Рост средней маржи дилера на 8%</div>
+                <div style="color: #6b7280; margin-top: 0.5rem;">Без потери конкурентоспособности</div>
+            </div>
+            
+            <div class="pagination">Слайд 6 из 15</div>
+        </div>
+        
+        <!-- Слайд 7: Бизнес-модель -->
+        <div id="slide7" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Бизнес-модель</h2>
+                <p class="slide-subtitle">SaaS-подписка + рост с масштабированием</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div style="background: #eff6ff; padding: 1.5rem; border-radius: 0.75rem;">
+                    <h3 style="font-weight: 700; color: #1e40af; margin-bottom: 1rem;">С поставщиков</h3>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #1e40af; margin-bottom: 0.5rem;">От 9 900 ₽/мес</div>
+                    <div style="color: #6b7280;">за управление до 10 дилеров</div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 0.75rem;">
+                    <h3 style="font-weight: 700; color: #10b981; margin-bottom: 1rem;">С дилеров</h3>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #10b981; margin-bottom: 0.5rem;">От 2 900 ₽/мес</div>
+                    <div style="color: #6b7280;">за готовый сайт</div>
+                </div>
+                
+                <div style="background: #faf5ff; padding: 1.5rem; border-radius: 0.75rem;">
+                    <h3 style="font-weight: 700; color: #8b5cf6; margin-bottom: 1rem;">Future</h3>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #8b5cf6; margin-bottom: 0.5rem;">Транзакционная комиссия</div>
+                    <div style="color: #6b7280;">после сетевого эффекта</div>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Прогноз выручки (ARR)</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Год</th>
+                        <th>Кол-во поставщиков</th>
+                        <th>Кол-во дилеров</th>
+                        <th>ARR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2025</strong></td>
+                        <td>50</td>
+                        <td>500</td>
+                        <td style="font-weight: 700; color: #1e40af;">24 млн ₽</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2026</strong></td>
+                        <td>200</td>
+                        <td>2 000</td>
+                        <td style="font-weight: 700; color: #1e40af;">96 млн ₽</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2027</strong></td>
+                        <td>500</td>
+                        <td>5 000</td>
+                        <td style="font-weight: 700; color: #1e40af;">240 млн ₽</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="section-title" style="margin-top: 2rem;">Ключевые метрики</h3>
+            
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 1rem;">
+                <div style="text-align: center; padding: 1rem; flex: 1; min-width: 150px;">
+                    <div style="font-size: 1.75rem; font-weight: 800; color: #10b981;">LTV/CAC > 3</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Соотношение ценности к стоимости привлечения</div>
+                </div>
+                
+                <div style="text-align: center; padding: 1rem; flex: 1; min-width: 150px;">
+                    <div style="font-size: 1.75rem; font-weight: 800; color: #10b981;">Churn < 3%</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Ежемесячный отток клиентов</div>
+                </div>
+                
+                <div style="text-align: center; padding: 1rem; flex: 1; min-width: 150px;">
+                    <div style="font-size: 1.75rem; font-weight: 800; color: #10b981;">Gross Margin > 85%</div>
+                    <div style="color: #6b7280; font-size: 0.9rem;">Валовая маржа</div>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 7 из 15</div>
+        </div>
+        
+        <!-- Слайд 8: ROI для клиентов -->
+        <div id="slide8" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">ROI для клиентов</h2>
+                <p class="slide-subtitle">Экономика, которая продает сама себя</p>
+            </div>
+            
+            <h3 class="section-title">Для поставщика с оборотом 50 млн ₽/мес:</h3>
+            
+            <div class="roi-calculation">
+                <div class="roi-title">Экономия от внедрения:</div>
+                
+                <div class="roi-detail">
+                    <span>Сокращение ФОТ: 2 → 0.5 менеджера</span>
+                    <span style="font-weight: 600;">= -1.5 чел (120 000 ₽/мес)</span>
+                </div>
+                
+                <div class="roi-detail">
+                    <span>Снижение ошибок: 15% → <1%</span>
+                    <span style="font-weight: 600;">= экономия 1% оборота (500 000 ₽/мес)</span>
+                </div>
+                
+                <div class="section-divider"></div>
+                
+                <div class="roi-detail">
+                    <span>Итого экономия:</span>
+                    <span style="font-weight: 600;">620 000 ₽/мес или 7.4 млн ₽/год</span>
+                </div>
+                
+                <div class="roi-detail">
+                    <span>Затраты на Nexus Supply Platform:</span>
+                    <span style="font-weight: 600;">~10 000 ₽/мес (120 000 ₽/год)</span>
+                </div>
+                
+                <div class="section-divider"></div>
+                
+                <div class="roi-total">Чистый эффект: +7.28 млн ₽/год<br>Окупаемость: < 1 месяца</div>
+            </div>
+            
+            <h3 class="section-title" style="margin-top: 2rem;">Для дилера с оборотом 5 млн ₽/мес:</h3>
+            
+            <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 0.75rem; margin-top: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Рост конверсии: +15%</span>
+                    <span style="font-weight: 600;">= +750 000 ₽/мес выручки</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Рост маржи от AI: +8%</span>
+                    <span style="font-weight: 600;">= +40 000 ₽/мес прибыли</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Экономия на IT</span>
+                    <span style="font-weight: 600;">= -100 000 ₽/мес</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Затраты на Nexus Supply Platform</span>
+                    <span style="font-weight: 600;">≈ 5 000 ₽/мес</span>
+                </div>
+                
+                <div style="border-top: 1px solid #bbf7d0; margin-top: 1rem; padding-top: 1rem;">
+                    <div style="text-align: center; font-size: 1.5rem; font-weight: 800; color: #10b981;">
+                        Чистый эффект: +785 000 ₽/мес
+                    </div>
+                    <div style="text-align: center; color: #6b7280; margin-top: 0.25rem;">
+                        Окупаемость в 1 неделю
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 8 из 15</div>
+        </div>
+        
+        <!-- Слайд 9: Команда -->
+        <div id="slide9" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Команда</h2>
+                <p class="slide-subtitle">Опыт в B2B, технологии и дистрибуции</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-name">[Имя]</div>
+                    <div class="team-role">CEO</div>
+                    <div style="color: #6b7280;">
+                        <strong>12+ лет в B2B-продажах</strong>, 2 успешных SaaS-стартапа. Лично столкнулся с проблемой.
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-name">[Имя]</div>
+                    <div class="team-role">CTO</div>
+                    <div style="color: #6b7280;">
+                        Бывший руководитель разработки в крупной IT-корпорации. <strong>Эксперт в cloud и AI.</strong>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-name">[Имя]</div>
+                    <div class="team-role">CBDO</div>
+                    <div style="color: #6b7280;">
+                        <strong>20+ лет в дистрибуции</strong>, построил сеть из 200+ дилеров. Глубокое понимание рынка изнутри.
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="section-title" style="margin-top: 2rem;">Компетенции команды</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+                    <div style="font-weight: 600; color: #1e40af;">Глубокое понимание предметной области</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+                    <div style="font-weight: 600; color: #1e40af;">Опыт масштабирования SaaS-продуктов</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+                    <div style="font-weight: 600; color: #1e40af;">Технологическая экспертиза</div>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; text-align: center;">
+                    <div style="font-weight: 600; color: #1e40af;">Навыки продаж и построения партнерств</div>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 9 из 15</div>
+        </div>
+        
+        <!-- Слайд 10: Конкуренция -->
+        <div id="slide10" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Конкуренция</h2>
+                <p class="slide-subtitle">Мы не конкурируем, мы создаем новую категорию</p>
+            </div>
+            
+            <table class="competition-table">
+                <thead>
+                    <tr>
+                        <th>Тип решения</th>
+                        <th>Примеры</th>
+                        <th>Чего не хватает</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>B2B-маркетплейсы</strong></td>
+                        <td>B2B-Center, Тендерпрост</td>
+                        <td>Не автоматизируют связку «поставщик-дилер»</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ERP/CRM системы</strong></td>
+                        <td>1С, МойСклад, Битрикс24</td>
+                        <td>Нет специализации под B2B2C, сложно внедрять</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Самописные решения</strong></td>
+                        <td>Индивидуальные разработки</td>
+                        <td>Дорого, долго, нет стандартизации</td>
+                    </tr>
+                    <tr style="background-color: #eff6ff;">
+                        <td><strong style="color: #1e40af;">Nexus Supply Platform</strong></td>
+                        <td><strong style="color: #1e40af;">Наше решение</strong></td>
+                        <td><strong style="color: #1e40af;">Сквозная автоматизация именно связки, а не изолированных процессов</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="key-metric" style="margin-top: 2rem;">
+                <div class="key-metric-value">Уникальное преимущество</div>
+                <div class="key-metric-label">
+                    Глубина автоматизации именно <strong>связи</strong> между поставщиком и дилером, а не просто каталог товаров или CRM
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 10 из 15</div>
+        </div>
+        
+        <!-- Слайд 11: Финансы и инвестиции -->
+        <div id="slide11" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Финансы и инвестиции</h2>
+                <p class="slide-subtitle">$500K на 18 месяцев для выхода на операционную безубыточность</p>
+            </div>
+            
+            <div class="investment-grid">
+                <div class="investment-card">
+                    <div class="investment-value">40% ($200K)</div>
+                    <div>Усиление команды (разработка, продажи)</div>
+                </div>
+                
+                <div class="investment-card">
+                    <div class="investment-value">35% ($175K)</div>
+                    <div>Маркетинг и customer acquisition</div>
+                </div>
+                
+                <div class="investment-card">
+                    <div class="investment-value">15% ($75K)</div>
+                    <div>Развитие продукта (AI, интеграции)</div>
+                </div>
+                
+                <div class="investment-card">
+                    <div class="investment-value">10% ($50K)</div>
+                    <div>Операционные расходы</div>
+                </div>
+            </div>
+            
+            <h3 class="section-title" style="margin-top: 2rem;">Цели раунда (к Q2 2026):</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #0ea5e9; margin-bottom: 0.5rem;">200</div>
+                    <div style="font-weight: 600;">платящих поставщиков</div>
+                    <div style="color: #6b7280; font-size: 0.9rem; margin-top: 0.25rem;">(сейчас: 3 пилотных)</div>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #10b981; margin-bottom: 0.5rem;">2 000</div>
+                    <div style="font-weight: 600;">активных дилеров</div>
+                    <div style="color: #6b7280; font-size: 0.9rem; margin-top: 0.25rem;">(сейчас: 15)</div>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 1.5rem; border-radius: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #f59e0b; margin-bottom: 0.5rem;">$1.1M+</div>
+                    <div style="font-weight: 600;">ARR</div>
+                    <div style="color: #6b7280; font-size: 0.9rem; margin-top: 0.25rem;">(выход на операционную безубыточность)</div>
+                </div>
+            </div>
+            
+            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem; margin-top: 2rem;">
+                <div style="font-weight: 700; color: #1e40af; margin-bottom: 1rem;">Использование средств:</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <div style="font-weight: 600; color: #6b7280;">Месяц 1-6:</div>
+                        <div>Усиление команды, запуск AI-ассистента</div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #6b7280;">Месяц 7-12:</div>
+                        <div>Активные продажи, выход в 2 новые отрасли</div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #6b7280;">Месяц 13-18:</div>
+                        <div>Масштабирование, подготовка к раунду А</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 11 из 15</div>
+        </div>
+        
+        <!-- Слайд 12: Дорожная карта -->
+        <div id="slide12" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Дорожная карта</h2>
+                <p class="slide-subtitle">От MVP к лидеру рынка за 3 года</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <h3 style="font-weight: 700; margin-bottom: 0.5rem;">MVP и валидация</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li>Запуск ядра платформы</li>
+                        <li>Пилот с 20 поставщиками (200 дилеров)</li>
+                        <li>Интеграция с 1С/МойСклад</li>
+                        <li>Базовые AI-функции (ассистент)</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2026</div>
+                    <h3 style="font-weight: 700; margin-bottom: 0.5rem;">Масштабирование</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li>200 поставщиков, 2 000 дилеров</li>
+                        <li>Мобильное приложение для дилеров</li>
+                        <li>Расширенная аналитика</li>
+                        <li>Выход в 2 новые отрасли</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2027+</div>
+                    <h3 style="font-weight: 700; margin-bottom: 0.5rem;">Экосистема</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li>AI-модули (прогноз спроса, автоцены)</li>
+                        <li>Финансовые сервисы (факторинг)</li>
+                        <li>Выход на рынок СНГ</li>
+                        <li>500+ поставщиков, 5 000+ дилеров</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 12 из 15</div>
+        </div>
+        
+        <!-- Слайд 13: Риски -->
+        <div id="slide13" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Риски</h2>
+                <p class="slide-subtitle">Мы видим риски и знаем, как с ними работать</p>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Риск</th>
+                        <th>Вероятность</th>
+                        <th>Влияние</th>
+                        <th>Стратегия минимизации</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Медленный рост клиентской базы</strong></td>
+                        <td>Средняя</td>
+                        <td>Высокое</td>
+                        <td>Фокус на нишевые отрасли с высокой готовностью к автоматизации. Партнерство с отраслевыми ассоциациями.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Конкуренция с крупными игроками</strong></td>
+                        <td>Низкая/Средняя</td>
+                        <td>Высокое</td>
+                        <td>Формирование сильного комьюнити первых клиентов. Специализация на B2B2C связке, которую крупные игроки игнорируют.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сложность внедрения у клиентов</strong></td>
+                        <td>Средняя</td>
+                        <td>Среднее</td>
+                        <td>Максимально упрощенный onboarding. Готовые интеграции. Персональное сопровождение первых 100 клиентов.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Технологические риски</strong></td>
+                        <td>Низкая</td>
+                        <td>Среднее</td>
+                        <td>Модульная архитектура. Постоянное тестирование. Резервные копии. SLA 99.5%.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="pagination">Слайд 13 из 15</div>
+        </div>
+        
+        <!-- Слайд 14: Контакты и призыв к действию -->
+        <div id="slide14" class="slide">
+            <div class="cta-box">
+                <h2 class="cta-title">Давайте строить новый стандарт B2B2C вместе</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                    <div>
+                        <h3 style="font-weight: 700; margin-bottom: 1rem;">Ключевые тезисы для инвесторов:</h3>
+                        <ol style="margin-left: 1rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Рынок:</strong> 65 трлн ₽, растет на 15-17% в год</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Решение:</strong> Единственная платформа для сквозной автоматизации цепочки</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Экономика:</strong> ROI для клиента — 1 месяц, для нас — SaaS с маржой 85%+</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Команда:</strong> Опыт в B2B, технологиях и дистрибуции</li>
+                            <li><strong>Трафик:</strong> Пилоты подтвердили спрос и экономику</li>
+                        </ol>
+                    </div>
+                    
+                    <div>
+                        <h3 style="font-weight: 700; margin-bottom: 1rem;">Что мы ищем в инвесторах:</h3>
+                        <ul style="margin-left: 1rem;">
+                            <li style="margin-bottom: 0.5rem;">Стратегическое партнерство</li>
+                            <li style="margin-bottom: 0.5rem;">Опыт в B2B SaaS или маркетплейсах</li>
+                            <li style="margin-bottom: 0.5rem;">Помощь с нетворкингом в отраслях</li>
+                            <li>Долгосрочное видение</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <h3 class="section-title">Контакты</h3>
+                
+                <div style="display: inline-block; text-align: left; background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem;">
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-user" style="color: #3b82f6; width: 20px;"></i>
+                        <span style="margin-left: 0.5rem;">[Имя и фамилия CEO]</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-briefcase" style="color: #3b82f6; width: 20px;"></i>
+                        <span style="margin-left: 0.5rem;">[Должность]</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-phone" style="color: #3b82f6; width: 20px;"></i>
+                        <span style="margin-left: 0.5rem;">[Телефон]</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-envelope" style="color: #3b82f6; width: 20px;"></i>
+                        <span style="margin-left: 0.5rem;">[Email]</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-globe" style="color: #3b82f6; width: 20px;"></i>
+                        <span style="margin-left: 0.5rem;">Nexus Supply Platform.ru</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">Слайд 14 из 15</div>
+        </div>
+        
+        <!-- Слайд 15: Бонусные слайды -->
+        <div id="slide15" class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Дополнительные материалы</h2>
+                <p class="slide-subtitle">Готовы предоставить по запросу</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div style="background: #eff6ff; padding: 1.5rem; border-radius: 0.75rem;">
+                    <h3 style="font-weight: 700; color: #1e40af; margin-bottom: 1rem;">Техническая архитектура</h3>
+                    <ul style="margin-left: 1rem; color: #4b5563;">
+                        <li style="margin-bottom: 0.5rem;">Микросервисная архитектура</li>
+                        <li style="margin-bottom: 0.5rem;">Используемые технологии (Node.js, React, PostgreSQL, Redis)</li>
+                        <li style="margin-bottom: 0.5rem;">Масштабируемость до 10 000+ одновременных пользователей</li>
+                        <li>Подход к безопасности и данным</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 0.75rem;">
+                    <h3 style="font-weight: 700; color: #10b981; margin-bottom: 1rem;">Детальная финансовая модель</h3>
+                    <ul style="margin-left: 1rem; color: #4b5563;">
+                        <li style="margin-bottom: 0.5rem;">P&L на 5 лет</li>
+                        <li style="margin-bottom: 0.5rem;">Cash flow прогноз</li>
+                        <li style="margin-bottom: 0.5rem;">Сценарии (консервативный, базовый, агрессивный)</li>
+                        <li>Точки безубыточности</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 1.5rem; border-radius: 0.75rem;">
+                    <h3 style="font-weight: 700; color: #d97706; margin-bottom: 1rem;">Юнит-экономика</h3>
+                    <ul style="margin-left: 1rem; color: #4b5563;">
+                        <li style="margin-bottom: 0.5rem;">Расчет LTV для поставщика и дилера</li>
+                        <li style="margin-bottom: 0.5rem;">CAC по каналам привлечения</li>
+                        <li style="margin-bottom: 0.5rem;">Payback period</li>
+                        <li>План достижения profitability</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <h3 class="section-title">Формат файлов для отправки</h3>
+                
+                <div style="display: inline-block; text-align: left; background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem;">
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-file-powerpoint" style="color: #e11d48;"></i>
+                        <span style="margin-left: 0.5rem;">Pitch Deck (PowerPoint/Keynote)</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-file-pdf" style="color: #dc2626;"></i>
+                        <span style="margin-left: 0.5rem;">Pitch Deck (PDF для рассылки)</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-file-alt" style="color: #059669;"></i>
+                        <span style="margin-left: 0.5rem;">One-pager (PDF)</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <i class="fas fa-file-excel" style="color: #059669;"></i>
+                        <span style="margin-left: 0.5rem;">Financial Model (Excel)</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-file" style="color: #1e40af;"></i>
+                        <span style="margin-left: 0.5rem;">White Paper (PDF, 15 страниц)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-note">
+                <p><strong>Nexus Supply Platform Pitch Deck, Версия 1.0, Декабрь 2025</strong></p>
+                <p>Все данные основаны на исследованиях рынка и внутренних расчетах команды Nexus Supply Platform.</p>
+            </div>
+            
+            <div class="pagination">Слайд 15 из 15</div>
+        </div>
+    </div>
+    
+    <script>
+        // Навигация по слайдам
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            // Показ только первого слайда при загрузке
+            slides.forEach((slide, index) => {
+                if (index !== 0) {
+                    slide.style.display = 'none';
+                }
+            });
+            
+            // Обработчики для навигационных точек
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    // Скрываем все слайды
+                    slides.forEach(slide => {
+                        slide.style.display = 'none';
+                    });
+                    
+                    // Показываем выбранный слайд
+                    slides[index].style.display = 'block';
+                    
+                    // Обновляем активную точку
+                    navDots.forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                    
+                    // Прокрутка к началу слайда
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Навигация с клавиатуры
+            document.addEventListener('keydown', function(event) {
+                let currentSlideIndex = 0;
+                
+                // Находим текущий слайд
+                slides.forEach((slide, index) => {
+                    if (slide.style.display !== 'none') {
+                        currentSlideIndex = index;
+                    }
+                });
+                
+                // Обработка клавиш стрелок
+                if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                    // Следующий слайд
+                    const nextIndex = (currentSlideIndex + 1) % slides.length;
+                    
+                    // Скрываем все слайды
+                    slides.forEach(slide => {
+                        slide.style.display = 'none';
+                    });
+                    
+                    // Показываем следующий слайд
+                    slides[nextIndex].style.display = 'block';
+                    
+                    // Обновляем активную точку
+                    navDots.forEach(d => d.classList.remove('active'));
+                    navDots[nextIndex].classList.add('active');
+                    
+                    // Прокрутка к началу слайда
+                    window.scrollTo(0, 0);
+                }
+                
+                if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                    // Предыдущий слайд
+                    const prevIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                    
+                    // Скрываем все слайды
+                    slides.forEach(slide => {
+                        slide.style.display = 'none';
+                    });
+                    
+                    // Показываем предыдущий слайд
+                    slides[prevIndex].style.display = 'block';
+                    
+                    // Обновляем активную точку
+                    navDots.forEach(d => d.classList.remove('active'));
+                    navDots[prevIndex].classList.add('active');
+                    
+                    // Прокрутка к началу слайда
+                    window.scrollTo(0, 0);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

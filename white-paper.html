@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Paper: Nexus Supply Platform — Цифровая экосистема для автоматизации B2B2C</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #1e40af;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid #60a5fa;
+            padding-bottom: 0.75rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+        }
+        
+        .executive-summary {
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            border-left: 4px solid #2563eb;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .data-table th {
+            background-color: #3b82f6;
+            color: white;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        .data-table tr:hover {
+            background-color: #eff6ff;
+        }
+        
+        .metric-box {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .comparison-table th {
+            background-color: #10b981;
+            color: white;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .roi-calculation {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .roi-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #0ea5e9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-note {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #1e40af;
+            color: white;
+            padding: 2rem 1rem;
+        }
+        
+        .nav-sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-sidebar a:hover {
+            background-color: #3b82f6;
+        }
+        
+        .nav-sidebar h3 {
+            color: white;
+            margin-top: 0;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #60a5fa;
+        }
+        
+        .content-area {
+            margin-left: 300px;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .nav-sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin-bottom: 2rem;
+            }
+            
+            .content-area {
+                margin-left: 0;
+            }
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #4b5563;
+            border-left: 3px solid #9ca3af;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .key-point {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .source-reference {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #3b82f6;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #3b82f6;
+        }
+        
+        .market-analysis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .market-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-sidebar">
+        <h3>Nexus Supply Platform White Paper</h3>
+        <a href="#executive-summary">Резюме для руководителей</a>
+        <a href="#introduction">Введение</a>
+        <a href="#market-analysis">Анализ рынка</a>
+        <a href="#solution">Решение Nexus Supply Platform</a>
+        <a href="#ai-strategy">AI-стратегия</a>
+        <a href="#business-model">Бизнес-модель</a>
+        <a href="#financial-projections">Финансовые прогнозы</a>
+        <a href="#team">Команда</a>
+        <a href="#roadmap">Дорожная карта</a>
+        <a href="#risks">Риски</a>
+        <a href="#investment">Инвестиционное предложение</a>
+        <a href="#conclusion">Заключение</a>
+        <a href="#sources">Источники</a>
+        
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #60a5fa;">
+            <p style="font-size: 0.875rem;">Версия 2.0</p>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">Декабрь 2025</p>
+        </div>
+    </div>
+    
+    <div class="content-area">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="border-bottom: none; padding-bottom: 0;">White Paper</h1>
+            <h2 style="border-bottom: none; padding-bottom: 0; color: #1e40af;">Nexus Supply Platform</h2>
+            <p style="font-size: 1.5rem; color: #4b5563; margin-top: 0.5rem;">
+                Цифровая экосистема для полной автоматизации цепочки<br>
+                «Поставщик → Дилер → Клиент»
+            </p>
+        </header>
+        
+        <!-- Резюме для руководителей -->
+        <section id="executive-summary" class="section">
+            <h2>Резюме для руководителей и инвесторов</h2>
+            
+            <div class="executive-summary">
+                <p style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">
+                    Рынок B2B-дистрибуции в России, объемом <strong>свыше 65 трлн рублей</strong>, находится в состоянии острого структурного кризиса. Несмотря на всеобщую цифровизацию, ключевые процессы взаимодействия между производителями (поставщиками) и их сбытовой сетью (дилерами) остаются архаичными, ручными и убыточными.
+                </p>
+                
+                <p style="margin-bottom: 1rem;">
+                    Исследование ГК «Корус Консалтинг» подтверждает: <strong>медленная обработка запросов</strong> и <strong>критические ошибки в данных</strong> ежегодно съедают до 30% потенциальной прибыли участников рынка.
+                </p>
+                
+                <p style="margin-bottom: 1rem;">
+                    <strong>Nexus Supply Platform</strong> — это ответ на этот системный вызов. Мы создаем первую в России полноценную B2B2C-экосистему, которая заменяет хаос телефонных звонков, устаревших Excel-таблиц и мессенджеров на единую цифровую среду.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <div class="metric-box">
+                        <div class="metric-value">50%</div>
+                        <div class="metric-label">Сокращение операционных затрат для поставщика</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">8×</div>
+                        <div class="metric-label">Ускорение обработки заказов</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">+25%</div>
+                        <div class="metric-label">Рост конверсии дилеров</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">1.5 млн ₽/год</div>
+                        <div class="metric-label">Экономия для пары «поставщик-дилер»</div>
+                    </div>
+                </div>
+                
+                <p>
+                    <strong>Инвестиционный тезис</strong> прост: Nexus Supply Platform трансформирует издержки в прибыль. Рынок, объем которого к 2030 году превысит <strong>150 трлн рублей</strong>, и низкий уровень проникновения цифровых решений (менее 20%) создают беспрецедентную возможность для масштабирования.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Введение -->
+        <section id="introduction" class="section">
+            <h2>1. Введение: Парадокс цифровой эпохи</h2>
+            
+            <p>
+                Мы живем в мире, где потребитель может одним кликом заказать любой товар с доставкой за час, в то время как бизнес-клиент (дилер) тратит <strong>часы и дни</strong> на согласование заказа с поставщиком. Этот парадокс — следствие глубокого разрыва между цифровизацией B2C-сегмента и архаичными процессами в B2B.
+            </p>
+            
+            <div class="key-point">
+                <strong>Тренд:</strong> Исследование «Логистика-2025» однозначно указывает: <strong>цифровая интеграция с партнерами</strong> стала ключевым фактором конкурентоспособности. Компании, внедрившие платформы для автоматизированного обмена данными, показывают рост операционной эффективности на <strong>30-40%</strong>.
+            </div>
+            
+            <div class="key-point">
+                <strong>Реальность:</strong> При этом, согласно данным Ассоциации электронной торговли, только <strong>каждый пятый</strong> средний поставщик в России имеет специализированные инструменты для работы с дилерами.
+            </div>
+            
+            <p>
+                <strong>Nexus Supply Platform</strong> ликвидирует этот разрыв. Мы не просто создаем еще один SaaS-продукт; мы строим <strong>новый стандарт отраслевого взаимодействия</strong>, который становится цифровым фундаментом для тысяч компаний.
+            </p>
+        </section>
+        
+        <!-- Анализ рынка -->
+        <section id="market-analysis" class="section">
+            <h2>2. Анализ рынка: Глубина проблемы и масштаб возможности</h2>
+            
+            <h3>2.1. Анализ «боли» рынка: Почему индустрия теряет миллиарды?</h3>
+            
+            <p>
+                Текущая модель дистрибуции построена на ручных, несинхронизированных процессах, которые создают трение на каждом этапе.
+            </p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Участник</th>
+                        <th>Ключевая проблема</th>
+                        <th>Финансовые и операционные последствия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Поставщик</strong></td>
+                        <td>Ручное управление прайсами и остатками для десятков дилеров</td>
+                        <td>
+                            • <strong>Временные потери:</strong> До 60% времени менеджеров<br>
+                            • <strong>Ошибки:</strong> До 15% заказов с ошибками<br>
+                            • <strong>Риски:</strong> Неконтролируемый канал сбыта, ценовой хаос
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Дилер</strong></td>
+                        <td>Постоянный поиск актуальных цен и наличия, отсутствие своего онлайн-канала</td>
+                        <td>
+                            • <strong>Упущенная выручка:</strong> Конверсия сайта 5-7%<br>
+                            • <strong>Низкая маржинальность:</strong> Негибкое ценообразование<br>
+                            • <strong>Высокие издержки:</strong> Затраты на разработку и поддержку IT
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Клиент</strong></td>
+                        <td>Непрозрачность сроков и наличия, долгое согласование</td>
+                        <td>
+                            <strong>Снижение лояльности,</strong> переход к конкурентам
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p class="key-point">
+                <strong>Вывод:</strong> Проблемы носят <strong>системный характер</strong>. Решение для одного звена цепочки неэффективно; требуется <strong>сквозная</strong> цифровизация всей связки «Поставщик-Дилер-Клиент».
+            </p>
+            
+            <h3>2.2. Рыночный потенциал: TAM, SAM, SOM</h3>
+            
+            <p>
+                Рынок B2B e-commerce в России демонстрирует взрывной рост, двигаясь в онлайн вслед за потребительским сегментом.
+            </p>
+            
+            <div class="market-analysis">
+                <div class="market-card">
+                    <h4>TAM (Total Addressable Market)</h4>
+                    <div class="metric-value">65.8 трлн ₽</div>
+                    <p class="metric-label">Объем рынка B2B/B2G онлайн-закупок в РФ в 2024 году</p>
+                    <p style="margin-top: 0.5rem;">36.8% ВВП России</p>
+                </div>
+                
+                <div class="market-card">
+                    <h4>SAM (Serviceable Available Market)</h4>
+                    <div class="metric-value">Десятки тысяч компаний</div>
+                    <p class="metric-label">Средние поставщики и дилеры в товарных отраслях</p>
+                    <p style="margin-top: 0.5rem;">Строительство и отделка, промышленные компоненты, сантехника, климат, мебель</p>
+                </div>
+                
+                <div class="market-card">
+                    <h4>SOM (Serviceable Obtainable Market)</h4>
+                    <div class="metric-value">500-1000 компаний</div>
+                    <p class="metric-label">Наша целевая аудитория на первые 3 года</p>
+                    <p style="margin-top: 0.5rem;">Фокус на нишевые вертикали с высоким чеком и сложным ассортиментом</p>
+                </div>
+            </div>
+            
+            <div class="roi-calculation">
+                <h4>Прогноз роста рынка</h4>
+                <div class="roi-value">154.7 трлн ₽ к 2030 году</div>
+                <p>Рост в 2.3 раза, CAGR 15-17%</p>
+            </div>
+            
+            <div class="key-point">
+                <strong>Рыночное окно:</strong> Уход международных IT-решений и государственный курс на импортозамещение создают уникальный исторический шанс для отечественной платформы стать отраслевым стандартом.
+            </div>
+        </section>
+        
+        <!-- Решение Nexus Supply Platform -->
+        <section id="solution" class="section">
+            <h2>3. Решение Nexus Supply Platform: Архитектура экосистемы</h2>
+            
+            <p>
+                Nexus Supply Platform — это не набор разрозненных инструментов, а целостная <strong>экосистема с двусторонним потоком данных</strong>, состоящая из двух взаимосвязанных платформ.
+            </p>
+            
+            <h3>3.1. Платформа 1: Supplier Hub – Центр управления дистрибуцией</h3>
+            
+            <p><strong>Цель:</strong> Дать поставщику полный контроль над сетью и избавить от рутины.</p>
+            
+            <h4>Ключевые модули:</h4>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Центр управления дилерами:</strong> «Одно-кликовое» добавление партнеров, сегментация, настройка индивидуальных условий (цены, скидки, видимость товаров)</li>
+                <li><strong>Умный каталог:</strong> Единая точка обновления товаров, описаний, фото, цен и остатков. Поддержка массовой загрузки и <strong>API-интеграций (1С, МойСклад, Галактика)</strong></li>
+                <li><strong>Панель заказов:</strong> Консолидированная лента заказов от всех дилеров в структурированном виде. Статусы (Новый/Принят/Отгружен) и сквозное уведомление дилеров</li>
+                <li><strong>Аналитика:</strong> Дашборды по продажам, эффективности дилеров, товарной аналитике</li>
+            </ul>
+            
+            <h3>3.2. Платформа 2: Dealer Platform – Бизнес «под ключ» для дилера</h3>
+            
+            <p><strong>Цель:</strong> Сделать дилера эффективным цифровым продавцом за 1 день, без затрат на IT.</p>
+            
+            <h4>Личный кабинет (Back-office):</h4>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Каталог с AI-наценкой:</strong> Автоматическая синхронизация товаров от поставщиков. Гибкая система наценок (глобальная, групповая, индивидуальная). <strong>Розничная цена пересчитывается мгновенно</strong> при изменении оптовой</li>
+                <li><strong>Управление заказами:</strong> Лента заказов с сайта. Функция «Подтвердить и передать поставщику» в один клик</li>
+                <li><strong>Брендирование:</strong> Настройка логотипа, цветов, контактов для своего сайта</li>
+            </ul>
+            
+            <h4>Публичный сайт (Storefront):</h4>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Автогенерируемый интернет-магазин:</strong> Современный, адаптивный сайт на своем домене</li>
+                <li><strong>Актуальный контент:</strong> Цены и наличие всегда синхронизированы с данными поставщика</li>
+                <li><strong>Полный цикл покупки:</strong> Корзина, оформление, личный кабинет клиента</li>
+            </ul>
+            
+            <h3>3.3. Технологическое ядро и интеграции</h3>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Real-time Sync:</strong> Специально разработанный механизм синхронизации данных (цены, остатки) между Hub и Platform с задержкой менее 5 минут</li>
+                <li><strong>Telegram API:</strong> Интеграция с ботами для мгновенных уведомлений дилеров о новых заказах и поставщиков — о подтвержденных заказах</li>
+                <li><strong>Открытое API:</strong> Возможность для интеграции со сторонними CRM, ERP, системами аналитики и службами доставки</li>
+            </ul>
+        </section>
+        
+        <!-- AI-стратегия -->
+        <section id="ai-strategy" class="section">
+            <h2>4. Стратегия внедрения искусственного интеллекта</h2>
+            
+            <p>
+                AI — не «фича для галочки», а следующий эволюционный этап платформы, заложенный в архитектуру с первого дня.
+            </p>
+            
+            <h3>4.1. Roadmap AI-функций</h3>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Этап</th>
+                        <th>Срок</th>
+                        <th>Фокус</th>
+                        <th>Конкретные решения</th>
+                        <th>Ожидаемый эффект</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Data Foundation</strong></td>
+                        <td>2025</td>
+                        <td>Сбор данных</td>
+                        <td>Внедрение Data Pipeline, создание Feature Store</td>
+                        <td>Формирование уникального дата-сета по B2B-транзакциям</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Операционный AI</strong></td>
+                        <td>2025-2026</td>
+                        <td>Автоматизация рутины</td>
+                        <td>1. AI-ассистент (NLP) для чата с клиентами<br>2. CV для валидации заказов по фото<br>3. Базовая рекомендательная система</td>
+                        <td>Сокращение операционных затрат клиентов на 25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Предиктивный AI</strong></td>
+                        <td>2026-2027</td>
+                        <td>Оптимизация бизнеса</td>
+                        <td>1. Прогноз спроса для поставщиков<br>2. Динамическое ценообразование для дилеров<br>3. Predictive Logistics</td>
+                        <td>Рост маржинальности участников на 5-10%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Автономный AI</strong></td>
+                        <td>2027+</td>
+                        <td>Сетевой эффект</td>
+                        <td>AI-агенты для автоматических закупок и управления запасами</td>
+                        <td>Формирование самооптимизирующейся экосистемы</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>4.2. Конкретный пример: AI-ценообразование для дилера</h3>
+            
+            <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.375rem; padding: 1.5rem; margin: 1.5rem 0; font-family: monospace;">
+                // Упрощенная логика модели динамического ценообразования<br>
+                function calculate_optimal_price(base_cost, competitor_prices, demand_trend, stock_days) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;// ML-модель анализирует 15+ факторов для расчета цены<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;price_factor = ml_model.predict([base_cost, competitor_prices, demand_trend, stock_days])<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;final_price = base_cost * price_factor // Например, 1.18 - 1.42<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return final_price<br>
+                }
+            </div>
+            
+            <div class="roi-calculation">
+                <h4>Экономический эффект AI-ценообразования</h4>
+                <div class="roi-value">Рост средней маржи дилера на 8%</div>
+                <p>Замена фиксированной наценки в 25% на динамический диапазон 18-42% дает дилеру рост маржи без потери конкурентоспособности</p>
+            </div>
+        </section>
+        
+        <!-- Бизнес-модель -->
+        <section id="business-model" class="section">
+            <h2>5. Бизнес-модель и финансовые прогнозы</h2>
+            
+            <h3>5.1. Монетизация (Hybrid SaaS)</h3>
+            
+            <ol style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Подписка с поставщика (основной драйвер):</strong> От <strong>9 900 руб./мес.</strong> за управление до 10 дилеров и 1000 товаров. Корпоративные тарифы — от <strong>29 900 руб./мес.</strong></li>
+                <li><strong>Подписка с дилера:</strong> От <strong>2 900 руб./мес.</strong> за готовый сайт и подключение к 3 поставщикам</li>
+                <li><strong>Транзакционная комиссия (опция будущего):</strong> Небольшой процент от оборота заказов, прошедших через платформу, после достижения сетевого эффекта</li>
+            </ol>
+            
+            <h3>5.2. Расчет ROI для клиента</h3>
+            
+            <h4>Для поставщика с оборотом 50 млн руб./мес. через дилеров:</h4>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Экономия на ФОТ:</strong> Сокращение 2 менеджеров (120 000 руб./мес.)</li>
+                <li><strong>Снижение потерь от ошибок:</strong> Экономия 1% от оборота (500 000 руб./мес.)</li>
+                <li><strong>Итого экономия:</strong> ~620 000 руб./мес. или <strong>7.4 млн руб./год</strong></li>
+                <li><strong>Затраты на Nexus Supply Platform:</strong> ~120 000 руб./год (тариф "Профессиональный")</li>
+                <li><strong>Чистый финансовый эффект:</strong> <strong>+7.28 млн руб./год.</strong> Окупаемость — менее месяца</li>
+            </ul>
+            
+            <h4>Для дилера с оборотом 5 млн руб./мес.:</h4>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Рост конверсии:</strong> +15% = +750 000 руб./мес. выручки</li>
+                <li><strong>Рост маржи от AI:</strong> +8% = +40 000 руб./мес. прибыли</li>
+                <li><strong>Экономия на IT:</strong> -100 000 руб./мес</li>
+                <li><strong>Затраты на Nexus Supply Platform:</strong> ~5 000 руб./мес</li>
+                <li><strong>Чистый финансовый эффект:</strong> <strong>+785 000 руб./мес.</strong> Окупаемость — в первую неделю</li>
+            </ul>
+        </section>
+        
+        <!-- Финансовые прогнозы -->
+        <section id="financial-projections" class="section">
+            <h2>6. Финансовые прогнозы проекта</h2>
+            
+            <h3>6.1. Прогноз выручки (консервативный сценарий)</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Год</th>
+                        <th>Кол-во поставщиков</th>
+                        <th>Кол-во дилеров</th>
+                        <th>ARR (Annual Recurring Revenue)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2025 (Год 1)</strong></td>
+                        <td>50</td>
+                        <td>500</td>
+                        <td><strong>~24 млн руб.</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2026 (Год 2)</strong></td>
+                        <td>200</td>
+                        <td>2,000</td>
+                        <td><strong>~96 млн руб.</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2027 (Год 3)</strong></td>
+                        <td>500</td>
+                        <td>5,000</td>
+                        <td><strong>~240 млн руб.</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p class="metric-label" style="margin-top: 0.5rem;">
+                *Метрики качества:* Планируемый LTV/CAC > 3, Monthly Churn < 3%, Gross Margin > 85%
+            </p>
+            
+            <h3>6.2. Ключевые финансовые метрики</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="metric-box">
+                    <div class="metric-value">LTV/CAC > 3</div>
+                    <div class="metric-label">Соотношение пожизненной ценности клиента к стоимости его привлечения</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">Churn < 3%</div>
+                    <div class="metric-label">Ежемесячный отток клиентов</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">85%+</div>
+                    <div class="metric-label">Валовая маржа (Gross Margin)</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Команда -->
+        <section id="team" class="section">
+            <h2>7. Команда и дорожная карта</h2>
+            
+            <h3>7.1. Команда основателей</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                <div class="metric-box">
+                    <h4>CEO: [Имя]</h4>
+                    <p><strong>12+ лет в B2B-продажах</strong> и построении дилерских сетей. Основал 2 успешных SaaS-стартапа. Лично столкнулся с описываемыми проблемами.</p>
+                </div>
+                
+                <div class="metric-box">
+                    <h4>CTO: [Имя]</h4>
+                    <p>Бывший руководитель разработки в крупной IT-корпорации. <strong>Эксперт в облачных архитектурах</strong> и high-load системах.</p>
+                </div>
+                
+                <div class="metric-box">
+                    <h4>CBDO: [Имя]</h4>
+                    <p><strong>20+ лет в дистрибуции</strong>. Построил сеть из 200+ дилеров "с нуля". Понимает боли рынка изнутри.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Дорожная карта -->
+        <section id="roadmap" class="section">
+            <h3>7.2. Дорожная карта продукта (Product Roadmap)</h3>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Этап 1: MVP и валидация (2025)</h4>
+                    <ul style="margin: 0.5rem 0 0 1rem;">
+                        <li>Запуск ядра с базовой синхронизацией, заказами и Telegram-ботами</li>
+                        <li>Пилот с 20 поставщиками</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Этап 2: Масштабирование (2025)</h4>
+                    <ul style="margin: 0.5rem 0 0 1rem;">
+                        <li>Интеграция с 1С/МойСклад</li>
+                        <li>Запуск мобильного приложения для дилеров</li>
+                        <li>Выход в 2 новые отрасли</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Этап 3: AI и экосистема (2026-2027)</h4>
+                    <ul style="margin: 0.5rem 0 0 1rem;">
+                        <li>Внедрение AI-модулей (цена, спрос, ассистент)</li>
+                        <li>Запуск финансовых сервисов (факторинг)</li>
+                        <li>Выход на рынок СНГ</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Риски -->
+        <section id="risks" class="section">
+            <h2>8. Риски и стратегия их минимизации</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Риск</th>
+                        <th>Вероятность</th>
+                        <th>Влияние</th>
+                        <th>Стратегия минимизации</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Низкие темпы привлечения клиентов</strong></td>
+                        <td>Средняя</td>
+                        <td>Высокое</td>
+                        <td>Фокус на нишевые "горячие" отрасли. Партнерство с отраслевыми ассоциациями. Внедрение реферальной программы.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Технологическая конкуренция</strong></td>
+                        <td>Низкая</td>
+                        <td>Среднее</td>
+                        <td>Упор на <strong>сквозную</strong> автоматизацию именно связки "поставщик-дилер", а не на изолированные решения. Глубокая экспертиза в предметной области.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сопротивление внедрению</strong></td>
+                        <td>Средняя</td>
+                        <td>Среднее</td>
+                        <td>Максимально упрощенный процесс onboarding (миграция данных, обучение). Ясный расчет ROI для первого пилота. Гибкая отмена подписки.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Выход на рынок крупного игрока</strong></td>
+                        <td>Низкая/Средняя</td>
+                        <td>Высокое</td>
+                        <td>Формирование сильного комьюнити первых клиентов и захват ключевых ниш до появления массового конкурента. Построение технологического барьера через AI и сетевой эффект данных.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Инвестиционное предложение -->
+        <section id="investment" class="section">
+            <h2>9. Инвестиционное предложение и использование средств</h2>
+            
+            <p>
+                Мы ищем <strong>$500,000</strong> на 18 месяцев для перехода от MVP к стадии масштабирования.
+            </p>
+            
+            <h3>9.1. Распределение инвестиций</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="metric-box">
+                    <div class="metric-value">40% ($200K)</div>
+                    <div class="metric-label">Усиление команды (доп. разработчики, продажи)</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">35% ($175K)</div>
+                    <div class="metric-label">Маркетинг и активные продажи</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">15% ($75K)</div>
+                    <div class="metric-label">Развитие продукта (API, мобильное приложение)</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">10% ($50K)</div>
+                    <div class="metric-label">Операционные расходы и юридическое сопровождение</div>
+                </div>
+            </div>
+            
+            <h3>9.2. Цель раунда</h3>
+            
+            <p>
+                Достичь показателей <strong>200 платящих поставщиков и 2,000 дилеров</strong> к концу 2026 года, выйти на операционную безубыточность и подготовить базу для раунда А.
+            </p>
+        </section>
+        
+        <!-- Заключение -->
+        <section id="conclusion" class="section">
+            <h2>10. Заключение</h2>
+            
+            <p>
+                Цепочка «Поставщик-Дилер-Клиент» — артерия товарной экономики, но сегодня она поражена «холестерином» ручных процессов. <strong>Nexus Supply Platform</strong> — это цифровой «кардиостимулятор», который запускает ее на полную мощность.
+            </p>
+            
+            <div class="key-point">
+                Мы предлагаем инвестору не просто долю в еще одном стартапе, а <strong>ключевую позицию в проекте по цифровой трансформации одной из основ российской экономики</strong>.
+            </div>
+            
+            <p>
+                Наше решение имеет четкую монетизацию, измеримый и значительный ROI для клиентов, опирается на подтвержденные рыночные тренды и строится опытной командой.
+            </p>
+            
+            <p>
+                Рынок ждет этого решения. Проблема назрела. Технологии готовы. Команда собрана. Мы приглашаем вас стать стратегическим партнером в создании новой, цифровой логики дистрибуции.
+            </p>
+        </section>
+        
+        <!-- Источники -->
+        <section id="sources" class="section">
+            <h2>11. Источники и методология</h2>
+            
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li>ГК «Корус Консалтинг» совместно с Retail & Loyalty. Анализ проблем рынка B2B-коммуникаций. 2025.</li>
+                <li>Исследование «Логистика-2025: тренды, которые нельзя игнорировать». 2025.</li>
+                <li>Внутренний анализ интервью с 50+ поставщиками и дилерами, проведенный командой Nexus Supply Platform. 2024-2025.</li>
+                <li>Данные Ассоциации электронной торговли России по рынку B2B e-commerce.</li>
+                <li>Аналитические отчеты Министерства экономического развития РФ.</li>
+                <li>Исследование рынка B2B SaaS решений в России, аналитический центр «ТЭТ-Аналитика». 2024.</li>
+            </ul>
+        </section>
+        
+        <!-- Контакты -->
+        <section style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 2rem; border-radius: 0.5rem; margin: 2rem 0;">
+            <h2 style="color: white; border-bottom: 2px solid #93c5fd; padding-bottom: 0.75rem;">Контакты</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div>
+                    <h4 style="color: white;">Контактная информация</h4>
+                    <p><i class="fas fa-user"></i> [Имя CEO]</p>
+                    <p><i class="fas fa-briefcase"></i> [Должность]</p>
+                    <p><i class="fas fa-phone"></i> [Телефон]</p>
+                    <p><i class="fas fa-envelope"></i> [Email]</p>
+                    <p><i class="fas fa-globe"></i> chainhub.ru</p>
+                </div>
+                
+                <div>
+                    <h4 style="color: white;">Приложения</h4>
+                    <p>1. Детальная финансовая модель (Excel)</p>
+                    <p>2. Презентация для инвесторов (Pitch Deck)</p>
+                    <p>3. Ссылка на демо-версию продукта</p>
+                    <p>4. Полный список пилотных клиентов</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer-note">
+            <p><strong>Nexus Supply Platform White Paper, Версия 2.0, Декабрь 2025</strong></p>
+            <p>Данный White Paper основан на анализе рынка, включая исследования ГК «Корус Консалтинг» и «Логистика-2025», а также на внутренних интервью с более чем 50 потенциальными клиентами. Все финансовые расчеты являются прогнозными и могут быть скорректированы.</p>
+            <p>© 2025 Nexus Supply Platform. Все права защищены.</p>
+        </footer>
+    </div>
+</body>
+</html>
