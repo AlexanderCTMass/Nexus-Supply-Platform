@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nexus Supply Platform: Цифровая экосистема для автоматизации цепочки «Поставщик → Дилер → Клиент». Сокращаем операционные издержки на 50% и ускоряем заказы в 8 раз.">
+    <meta name="keywords" content="B2B2C, автоматизация дистрибуции, поставщик, дилер, платформа, SaaS, White Paper">
+    <title>Nexus Supply Platform - Цифровая экосистема для автоматизации B2B2C</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP для анимаций -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --accent-color: #10B981;
+            --dark-text: #1F2937;
+            --light-text: #6B7280;
+            --bg-gradient-start: #F8FAFC;
+            --bg-gradient-end: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Анимации для появления элементов */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Стили для градиентного фона */
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+        }
+        
+        /* Стили для статистических карточек */
+        .stat-card {
+            transition: all 0.3s ease;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        /* Стили для кнопок */
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1D4ED8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background-color: #0DA271;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Стили для таблицы */
+        .comparison-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .comparison-table th {
+            background-color: #F9FAFB;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #E5E7EB;
+        }
+        
+        .comparison-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #F9FAFB;
+        }
+        
+        /* Стили для таймлайна */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 768px) {
+            .hide-on-mobile {
+                display: none;
+            }
+            
+            .mobile-center {
+                text-align: center;
+            }
+            
+            .section-padding {
+                padding: 60px 20px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .section-padding {
+                padding: 80px 40px;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .section-padding {
+                padding: 100px 60px;
+            }
+        }
+        
+        /* Стили для формы */
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        /* Индикатор загрузки */
+        .loader {
+            border: 3px solid #F3F3F3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Параллакс эффект */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+        
+        .close-modal:hover {
+            color: var(--dark-text);
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    <!-- Навигация -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-2xl font-bold text-blue-600">Nexus Supply Platform</div>
+                <nav class="hidden md:flex ml-10 space-x-6">
+                    <a href="#problem" class="text-gray-600 hover:text-blue-600 transition">Проблема</a>
+                    <a href="#solution" class="text-gray-600 hover:text-blue-600 transition">Решение</a>
+                    <a href="#market" class="text-gray-600 hover:text-blue-600 transition">Рынок</a>
+                    <a href="#ai" class="text-gray-600 hover:text-blue-600 transition">AI</a>
+                    <a href="#finance" class="text-gray-600 hover:text-blue-600 transition">Финансы</a>
+                    <a href="#team" class="text-gray-600 hover:text-blue-600 transition">Команда</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition">Контакты</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="downloadWhitePaper" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium hidden md:inline-block">
+                    <i class="fas fa-download mr-2"></i>White Paper
+                </button>
+                <button id="demoAccess" class="btn-accent px-4 py-2 rounded-lg text-sm font-medium">
+                    <i class="fas fa-play-circle mr-2"></i>Демо
+                </button>
+                <button id="mobileMenu" class="md:hidden text-gray-600 text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Мобильное меню -->
+        <div id="mobileNav" class="md:hidden bg-white shadow-lg hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="#problem" class="block text-gray-600 hover:text-blue-600 transition py-2">Проблема</a>
+                <a href="#solution" class="block text-gray-600 hover:text-blue-600 transition py-2">Решение</a>
+                <a href="#market" class="block text-gray-600 hover:text-blue-600 transition py-2">Рынок</a>
+                <a href="#ai" class="block text-gray-600 hover:text-blue-600 transition py-2">AI</a>
+                <a href="#finance" class="block text-gray-600 hover:text-blue-600 transition py-2">Финансы</a>
+                <a href="#team" class="block text-gray-600 hover:text-blue-600 transition py-2">Команда</a>
+                <a href="#contact" class="block text-gray-600 hover:text-blue-600 transition py-2">Контакты</a>
+                <button id="downloadWhitePaperMobile" class="btn-primary w-full py-3 rounded-lg font-medium mt-4">
+                    <i class="fas fa-download mr-2"></i>Скачать White Paper
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section id="hero" class="section-padding pt-24 md:pt-32">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 fade-in">
+                    <span class="text-blue-600">Nexus Supply Platform</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 fade-in">
+                    Цифровая экосистема для автоматизации цепочки<br>
+                    <span class="text-blue-600">«Поставщик → Дилер → Клиент»</span>
+                </h2>
+                <p class="text-xl text-gray-600 mb-10 max-w-3xl mx-auto fade-in" data-delay="0.2s">
+                    Сокращаем операционные издержки на <span class="font-bold text-green-600">50%</span> и ускоряем заказы в <span class="font-bold text-green-600">8 раз</span>
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+                    <div class="stat-card bg-white rounded-xl p-6 shadow-sm fade-in" data-delay="0.4s">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">65.8 трлн ₽</div>
+                        <div class="text-gray-600">Объем рынка B2B/B2G</div>
+                        <div class="text-sm text-gray-500 mt-2">36.8% ВВП России в 2024</div>
+                    </div>
+                    <div class="stat-card bg-white rounded-xl p-6 shadow-sm fade-in" data-delay="0.5s">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">1.5 млн ₽/год</div>
+                        <div class="text-gray-600">Экономия клиентов</div>
+                        <div class="text-sm text-gray-500 mt-2">При обороте 50 млн ₽/мес</div>
+                    </div>
+                    <div class="stat-card bg-white rounded-xl p-6 shadow-sm fade-in" data-delay="0.6s">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">+25%</div>
+                        <div class="text-gray-600">Рост конверсии дилеров</div>
+                        <div class="text-sm text-gray-500 mt-2">За счет актуальных цен</div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6 fade-in" data-delay="0.8s">
+                    <button id="watchPresentation" class="btn-primary px-8 py-4 rounded-lg font-bold text-lg">
+                        <i class="fas fa-play-circle mr-2"></i>Смотреть презентацию
+                    </button>
+                    <button id="downloadWP" class="bg-white border border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition">
+                        <i class="fas fa-file-pdf mr-2"></i>Скачать White Paper
+                    </button>
+                    <button id="requestDemo" class="btn-accent px-8 py-4 rounded-lg font-bold text-lg">
+                        <i class="fas fa-calendar-alt mr-2"></i>Запросить демо
+                    </button>
+                </div>
+                
+                <div class="mt-16 animate-bounce fade-in" data-delay="1s">
+                    <a href="#problem" class="text-gray-400 hover:text-blue-600 transition">
+                        <i class="fas fa-chevron-down text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проблема рынка -->
+    <section id="problem" class="section-padding bg-white">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in">
+                    Парадокс цифровой эпохи: B2C автоматизирован, B2B — нет
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="fade-in slide-in-left">
+                        <div class="bg-red-50 rounded-2xl p-8 border-l-4 border-red-500 h-full">
+                            <div class="text-4xl mb-4">🏭</div>
+                            <h3 class="text-xl font-bold mb-4">Для поставщика</h3>
+                            <p class="text-gray-600 mb-4"><strong>Проблема:</strong> Ручное управление прайсами для десятков дилеров</p>
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-red-400 mt-1 mr-3"></i>
+                                    <span><strong>60% времени менеджеров</strong> на обработку запросов</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-red-400 mt-1 mr-3"></i>
+                                    <span><strong>15% ошибок в заказах</strong> из-за ручного ввода</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-red-400 mt-1 mr-3"></i>
+                                    <span><strong>Неконтролируемый канал сбыта</strong>, ценовой хаос</span>
+                                </li>
+                            </ul>
+                            <div class="text-sm text-gray-500 italic">
+                                Источник: Исследование ГК «Корус Консалтинг»
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in">
+                        <div class="bg-yellow-50 rounded-2xl p-8 border-l-4 border-yellow-500 h-full">
+                            <div class="text-4xl mb-4">📊</div>
+                            <h3 class="text-xl font-bold mb-4">Для дилера</h3>
+                            <p class="text-gray-600 mb-4"><strong>Проблема:</strong> Поиск актуальных цен, отсутствие своего онлайн-канала</p>
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-yellow-400 mt-1 mr-3"></i>
+                                    <span><strong>Конверсия 5-7%</strong> из-за устаревших цен на сайте</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-yellow-400 mt-1 mr-3"></i>
+                                    <span><strong>Негибкое ценообразование</strong>, потеря маржи</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-yellow-400 mt-1 mr-3"></i>
+                                    <span><strong>Высокие затраты на IT</strong> (разработка и поддержка)</span>
+                                </li>
+                            </ul>
+                            <div class="bg-white rounded-lg p-4 mt-4">
+                                <div class="text-sm font-medium text-center">7-10 точек ручного взаимодействия в цепочке заказа</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in slide-in-right">
+                        <div class="bg-blue-50 rounded-2xl p-8 border-l-4 border-blue-500 h-full">
+                            <div class="text-4xl mb-4">😠</div>
+                            <h3 class="text-xl font-bold mb-4">Для клиента</h3>
+                            <p class="text-gray-600 mb-4"><strong>Проблема:</strong> Непрозрачность сроков и наличия</p>
+                            <ul class="space-y-2 mb-6">
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-blue-400 mt-1 mr-3"></i>
+                                    <span><strong>Долгое согласование</strong> заказа (2-4 часа вместо 15 мин)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-blue-400 mt-1 mr-3"></i>
+                                    <span><strong>Недостоверная информация</strong> о доступности товаров</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-blue-400 mt-1 mr-3"></i>
+                                    <span><strong>Снижение лояльности</strong>, переход к конкурентам</span>
+                                </li>
+                            </ul>
+                            <div class="bg-red-100 border border-red-200 rounded-lg p-4">
+                                <div class="text-lg font-bold text-red-700 text-center">Системные потери до 30% потенциальной прибыли</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Решение — Архитектура Nexus Supply Platform -->
+    <section id="solution" class="section-padding gradient-bg">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in">
+                    Единая экосистема вместо разрозненных инструментов
+                </h2>
+                
+                <!-- Интерактивная схема архитектуры -->
+                <div class="relative mb-16 fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                        <div class="bg-white rounded-2xl p-8 shadow-xl text-center">
+                            <div class="text-blue-600 text-5xl mb-6"><i class="fas fa-warehouse"></i></div>
+                            <h3 class="text-2xl font-bold mb-4">Supplier Hub</h3>
+                            <p class="text-gray-600 mb-4">Центр управления дистрибуцией</p>
+                            <ul class="text-left space-y-3 mb-6">
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Управление дилерами в 1 клик</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Автообновление каталога и цен</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Аналитика по дилерам и товарам</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> API для 1С, МойСклад, Галактика</li>
+                            </ul>
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <div class="font-bold text-blue-700">Сокращение операционных затрат на 50%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="hidden md:block text-center fade-in" data-delay="0.3s">
+                            <div class="text-4xl text-blue-500 animate-pulse">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="text-lg font-medium mt-4">Двусторонняя синхронизация в реальном времени</div>
+                            <div class="mt-6 text-gray-600">Задержка данных < 5 минут</div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-8 shadow-xl text-center fade-in" data-delay="0.6s">
+                            <div class="text-green-600 text-5xl mb-6"><i class="fas fa-store-alt"></i></div>
+                            <h3 class="text-2xl font-bold mb-4">Dealer Platform</h3>
+                            <p class="text-gray-600 mb-4">Бизнес «под ключ» для дилера</p>
+                            <ul class="text-left space-y-3 mb-6">
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Готовый интернет-магазин</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> AI-ценообразование</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Сквозные заказы в 1 клик</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Telegram-бот для уведомлений</li>
+                            </ul>
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <div class="font-bold text-green-700">Рост конверсии на 15-25%, ускорение обработки в 8 раз</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center fade-in" data-delay="0.9s">
+                        <div class="inline-block">
+                            <div class="text-2xl mb-2">↓</div>
+                            <div class="bg-white rounded-xl p-6 shadow-lg">
+                                <div class="text-xl font-bold mb-2">Сайт дилера → Клиент</div>
+                                <p class="text-gray-600">Автоматически генерируемый интернет-магазин с актуальными ценами и наличием</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg fade-in" data-delay="1.2s">
+                    <h4 class="text-xl font-bold mb-6 text-center">Технологическое ядро Nexus Supply Platform</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-bolt text-blue-600"></i>
+                            </div>
+                            <div class="font-medium">Real-time синхронизация</div>
+                            <div class="text-sm text-gray-500">Данные обновляются за 5 минут</div>
+                        </div>
+                        <div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fab fa-telegram text-blue-600"></i>
+                            </div>
+                            <div class="font-medium">Telegram API</div>
+                            <div class="text-sm text-gray-500">Мгновенные уведомления для всех участников</div>
+                        </div>
+                        <div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-code text-blue-600"></i>
+                            </div>
+                            <div class="font-medium">Открытое API</div>
+                            <div class="text-sm text-gray-500">Интеграция с любыми внешними системами</div>
+                        </div>
+                        <div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-rocket text-blue-600"></i>
+                            </div>
+                            <div class="font-medium">Быстрое внедрение</div>
+                            <div class="text-sm text-gray-500">Для дилера — 1 день, для поставщика — 3 дня</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Рынок и возможности -->
+    <section id="market" class="section-padding bg-white">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in">
+                    Рынок 65 трлн ₽, который ждет цифровизации
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                    <div class="fade-in slide-in-left">
+                        <div class="mb-8">
+                            <div class="text-5xl font-bold mb-2">65.8 трлн ₽</div>
+                            <p class="text-xl">Объем рынка B2B/B2G онлайн-закупок в 2024 году</p>
+                            <p class="text-gray-600 mt-2">36.8% ВВП России</p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                            <h3 class="text-xl font-bold mb-4">Ключевые инсайты рынка</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span><strong>Только 20% средних компаний</strong> автоматизировали закупки</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span><strong>Уход международных IT-решений</strong> создает окно возможностей</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                    <span><strong>Государственный курс на импортозамещение</strong> в корпоративном IT</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Калькулятор рынка -->
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4">Калькулятор рынка</h3>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Выберите отрасль:</label>
+                                <select id="industrySelect" class="form-input">
+                                    <option value="construction">Строительство и отделка</option>
+                                    <option value="plumbing">Сантехника и отопление</option>
+                                    <option value="industrial">Промышленные товары</option>
+                                    <option value="furniture">Мебель и фурнитура</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Количество компаний в отрасли:</label>
+                                <input type="range" id="companiesRange" min="100" max="10000" value="1000" class="w-full">
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>100</span>
+                                    <span id="companiesValue">1,000</span>
+                                    <span>10,000</span>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <div class="text-lg font-bold">Потенциальный объем рынка:</div>
+                                <div id="marketVolume" class="text-2xl font-bold text-blue-600 mt-2">12.5 млрд ₽</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in slide-in-right">
+                        <div class="bg-gray-900 text-white rounded-2xl p-8 h-full">
+                            <h3 class="text-2xl font-bold mb-6 text-center">TAM/SAM/SOM анализ</h3>
+                            
+                            <!-- График TAM/SAM/SOM (Chart.js) -->
+                            <div class="mb-8">
+                                <canvas id="marketChart" height="300"></canvas>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="font-bold text-lg mb-1">TAM (Весь рынок)</div>
+                                    <div class="text-gray-300">B2B/B2G онлайн-закупки: 65.8 трлн ₽</div>
+                                    <div class="text-sm text-gray-400">Все компании в России, работающие по модели «производитель/оптовик — дилер»</div>
+                                </div>
+                                
+                                <div>
+                                    <div class="font-bold text-lg mb-1">SAM (Доступный рынок)</div>
+                                    <div class="text-gray-300">Средние поставщики и дилеры в строительстве, отделке, промышленных товарах</div>
+                                    <div class="text-sm text-gray-400">Десятки тысяч компаний с оборотом от 50 млн до 1 млрд руб./год</div>
+                                </div>
+                                
+                                <div>
+                                    <div class="font-bold text-lg mb-1">SOM (Целевой рынок)</div>
+                                    <div class="text-gray-300">500-1000 компаний в нишевых отраслях в первые 2-3 года</div>
+                                    <div class="text-sm text-gray-400">Фокус на вертикалях с высоким чеком и сложным ассортиментом</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 p-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl">
+                                <div class="text-2xl font-bold mb-2">154.7 трлн ₽</div>
+                                <div>Прогноз объема рынка к 2030 году (рост в 2.3 раза, CAGR 15-17%)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI-стратегия -->
+    <section id="ai" class="section-padding gradient-bg">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in">
+                    AI — не фича, а следующий эволюционный этап
+                </h2>
+                
+                <!-- Дорожная карта AI -->
+                <div class="mb-16 fade-in">
+                    <div class="overflow-x-auto">
+                        <div class="flex flex-nowrap md:flex-wrap justify-between min-w-max md:min-w-0">
+                            <div class="text-center w-64 md:w-auto mb-8">
+                                <div class="bg-blue-100 text-blue-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-database text-xl"></i>
+                                </div>
+                                <div class="font-bold">2024-2025</div>
+                                <div class="text-lg font-medium">Data Foundation</div>
+                                <div class="text-gray-600 mt-2">Сбор и структурирование данных</div>
+                            </div>
+                            <div class="text-center w-64 md:w-auto mb-8">
+                                <div class="bg-green-100 text-green-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-cogs text-xl"></i>
+                                </div>
+                                <div class="font-bold">2025-2026</div>
+                                <div class="text-lg font-medium">Операционный AI</div>
+                                <div class="text-gray-600 mt-2">Автоматизация рутинных процессов</div>
+                            </div>
+                            <div class="text-center w-64 md:w-auto mb-8">
+                                <div class="bg-purple-100 text-purple-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-chart-line text-xl"></i>
+                                </div>
+                                <div class="font-bold">2026-2027</div>
+                                <div class="text-lg font-medium">Предиктивный AI</div>
+                                <div class="text-gray-600 mt-2">Прогнозы и оптимизация бизнеса</div>
+                            </div>
+                            <div class="text-center w-64 md:w-auto mb-8">
+                                <div class="bg-indigo-100 text-indigo-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-robot text-xl"></i>
+                                </div>
+                                <div class="font-bold">2027+</div>
+                                <div class="text-lg font-medium">Автономный AI</div>
+                                <div class="text-gray-600 mt-2">Самооптимизирующаяся экосистема</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="fade-in slide-in-left">
+                        <h3 class="text-2xl font-bold mb-6">Динамическое ценообразование</h3>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <div>
+                                    <div class="font-bold">До AI</div>
+                                    <div class="text-gray-600">Фиксированная наценка 25%</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold">С AI</div>
+                                    <div class="text-gray-600">Динамический диапазон 18-42%</div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-4 mb-2">
+                                <div class="bg-blue-600 rounded-full h-4" style="width: 25%"></div>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-4">
+                                <div class="bg-gradient-to-r from-green-400 to-blue-600 rounded-full h-4" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
+                            <div class="text-3xl font-bold text-green-700 mb-2">Результат:</div>
+                            <div class="text-xl font-medium">Рост средней маржи дилера на 8%</div>
+                            <div class="text-gray-600 mt-2">Без потери конкурентоспособности</div>
+                        </div>
+                        
+                        <div class="bg-gray-800 text-white rounded-xl p-6 code-font">
+                            <div class="text-sm text-gray-400 mb-2">// Упрощенная логика AI-ценообразования</div>
+                            <div class="mb-1"><span class="text-purple-400">def</span> <span class="text-green-400">calculate_optimal_price</span>(base_cost, demand, competition):</div>
+                            <div class="ml-4 mb-1"><span class="text-blue-400">price_factor</span> = <span class="text-yellow-400">ml_model</span>.predict([base_cost, demand, competition])</div>
+                            <div class="ml-4"><span class="text-blue-400">final_price</span> = base_cost * price_factor <span class="text-gray-500"># 1.18 - 1.42</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in slide-in-right">
+                        <h3 class="text-2xl font-bold mb-6">AI-кейсы</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-start">
+                                    <div class="bg-blue-100 text-blue-800 rounded-lg p-3 mr-4">
+                                        <i class="fas fa-comments text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-lg mb-1">AI-ассистент для чата с клиентами</div>
+                                        <div class="text-gray-600 mb-2">NLP-модель на основе RuBERT для обработки запросов</div>
+                                        <div class="bg-blue-50 text-blue-700 font-bold inline-block px-3 py-1 rounded-full text-sm">
+                                            -40% нагрузки на поддержку
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-start">
+                                    <div class="bg-green-100 text-green-800 rounded-lg p-3 mr-4">
+                                        <i class="fas fa-chart-bar text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-lg mb-1">Прогноз спроса для поставщиков</div>
+                                        <div class="text-gray-600 mb-2">LSTM-сети для прогнозирования спроса по дилерам и регионам</div>
+                                        <div class="bg-green-50 text-green-700 font-bold inline-block px-3 py-1 rounded-full text-sm">
+                                            +25% точность forecast
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-start">
+                                    <div class="bg-purple-100 text-purple-800 rounded-lg p-3 mr-4">
+                                        <i class="fas fa-eye text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-lg mb-1">CV для валидации заказов</div>
+                                        <div class="text-gray-600 mb-2">Computer Vision для распознавания товаров по фото от клиентов</div>
+                                        <div class="bg-purple-50 text-purple-700 font-bold inline-block px-3 py-1 rounded-full text-sm">
+                                            94% точность распознавания
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Финансовая модель и ROI -->
+    <section id="finance" class="section-padding bg-white">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in">
+                    Измеряемая экономика: ROI для клиента, рост для инвестора
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <div class="fade-in slide-in-left">
+                        <h3 class="text-2xl font-bold mb-6">ROI для клиента (поставщик с оборотом 50 млн ₽/мес)</h3>
+                        
+                        <div class="overflow-x-auto mb-8">
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Параметр</th>
+                                        <th>До Nexus Supply Platform</th>
+                                        <th>С Nexus Supply Platform</th>
+                                        <th>Эффект</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ошибки в заказах</td>
+                                        <td>15%</td>
+                                        <td>&lt;1%</td>
+                                        <td class="text-green-600 font-bold">-14%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Время менеджеров</td>
+                                        <td>2 чел.</td>
+                                        <td>0.5 чел.</td>
+                                        <td class="text-green-600 font-bold">-75%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Скорость обновления прайсов</td>
+                                        <td>1-3 дня</td>
+                                        <td>5 минут</td>
+                                        <td class="text-green-600 font-bold">-99%</td>
+                                    </tr>
+                                    <tr class="bg-gray-50 font-bold">
+                                        <td>Итого экономия</td>
+                                        <td>—</td>
+                                        <td>—</td>
+                                        <td class="text-green-700">7.4 млн ₽/год</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Затраты на Nexus Supply Platform</td>
+                                        <td>—</td>
+                                        <td>—</td>
+                                        <td class="text-blue-600">120 тыс ₽/год</td>
+                                    </tr>
+                                    <tr class="bg-green-50 font-bold text-lg">
+                                        <td>Чистый эффект</td>
+                                        <td>—</td>
+                                        <td>—</td>
+                                        <td class="text-green-800">+7.28 млн ₽/год</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <div class="text-lg font-bold mb-2">Окупаемость инвестиций:</div>
+                            <div class="text-3xl font-bold text-blue-700">Менее 1 месяца</div>
+                            <div class="text-gray-600 mt-2">Для поставщика с оборотом 50 млн ₽/мес</div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in slide-in-right">
+                        <h3 class="text-2xl font-bold mb-6">Прогноз выручки проекта (ARR)</h3>
+                        
+                        <!-- График роста ARR -->
+                        <div class="mb-8">
+                            <canvas id="revenueChart" height="300"></canvas>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-bold">2025 год</div>
+                                    <div class="text-gray-600">50 поставщиков, 500 дилеров</div>
+                                </div>
+                                <div class="text-2xl font-bold text-blue-600">24 млн ₽</div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-bold">2026 год</div>
+                                    <div class="text-gray-600">200 поставщиков, 2,000 дилеров</div>
+                                </div>
+                                <div class="text-2xl font-bold text-blue-600">96 млн ₽</div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-bold">2027 год</div>
+                                    <div class="text-gray-600">500 поставщиков, 5,000 дилеров</div>
+                                </div>
+                                <div class="text-2xl font-bold text-blue-600">240 млн ₽</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Инвестиционное предложение -->
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Инвестиционное предложение</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold mb-2">$500,000</div>
+                            <div class="text-lg">Раунд на 18 месяцев</div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold mb-4">Распределение инвестиций:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex justify-between">
+                                    <span>Усиление команды</span>
+                                    <span class="font-bold">40% ($200K)</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Маркетинг и продажи</span>
+                                    <span class="font-bold">35% ($175K)</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Развитие продукта</span>
+                                    <span class="font-bold">15% ($75K)</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span>Операционные расходы</span>
+                                    <span class="font-bold">10% ($50K)</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold mb-4">Цель раунда:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check mt-1 mr-2"></i>
+                                    <span><strong>200 платящих поставщиков</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check mt-1 mr-2"></i>
+                                    <span><strong>2,000 активных дилеров</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check mt-1 mr-2"></i>
+                                    <span><strong>Операционная безубыточность</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check mt-1 mr-2"></i>
+                                    <span><strong>Подготовка к раунду А</strong></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Команда и дорожная карта -->
+    <section id="team" class="section-padding gradient-bg">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in">
+                    Опытная команда, четкий план
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="fade-in slide-in-left">
+                        <h3 class="text-2xl font-bold mb-8">Команда основателей</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                                <div class="flex items-start">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-6">
+                                        АС
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-xl">Алексей Смирнов</div>
+                                        <div class="text-blue-600 font-medium mb-2">CEO, Основатель</div>
+                                        <p class="text-gray-600">
+                                            12+ лет в B2B-продажах и построении дилерских сетей. Основал 2 успешных SaaS-стартапа. Лично столкнулся с проблемами, которые решает Nexus Supply Platform.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                                <div class="flex items-start">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-700 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-6">
+                                        МК
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-xl">Мария Ковалева</div>
+                                        <div class="text-green-600 font-medium mb-2">CTO, Сооснователь</div>
+                                        <p class="text-gray-600">
+                                            Бывший руководитель разработки в крупной IT-корпорации. Эксперт в облачных архитектурах, high-load системах и AI/ML. Опыт управления командами 50+ человек.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                                <div class="flex items-start">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-6">
+                                        ДИ
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-xl">Дмитрий Иванов</div>
+                                        <div class="text-purple-600 font-medium mb-2">CBDO, Партнер</div>
+                                        <p class="text-gray-600">
+                                            20+ лет в дистрибуции. Построил сеть из 200+ дилеров "с нуля". Глубокое понимание болей рынка изнутри. Эксперт по масштабированию сбытовых сетей.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in slide-in-right">
+                        <h3 class="text-2xl font-bold mb-8">Дорожная карта продукта</h3>
+                        
+                        <div class="relative pl-6 border-l-2 border-blue-500">
+                            <div class="timeline-item">
+                                <div class="font-bold text-blue-700 mb-1">Q4 2024</div>
+                                <div class="text-lg font-medium">MVP и валидация</div>
+                                <ul class="mt-2 space-y-1">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Запуск ядра платформы</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Базовая синхронизация и заказы</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Telegram-боты для уведомлений</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Пилот с 20 поставщиками</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="font-bold text-blue-700 mb-1">2025 год</div>
+                                <div class="text-lg font-medium">Масштабирование</div>
+                                <ul class="mt-2 space-y-1">
+                                    <li><i class="fas fa-cogs text-blue-500 mr-2"></i> Интеграции с 1С, МойСклад, Галактика</li>
+                                    <li><i class="fas fa-mobile-alt text-blue-500 mr-2"></i> Мобильное приложение для дилеров</li>
+                                    <li><i class="fas fa-expand-alt text-blue-500 mr-2"></i> Выход в 2 новые отрасли</li>
+                                    <li><i class="fas fa-chart-line text-blue-500 mr-2"></i> Расширенная аналитика</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="font-bold text-blue-700 mb-1">2026-2027</div>
+                                <div class="text-lg font-medium">AI и экосистема</div>
+                                <ul class="mt-2 space-y-1">
+                                    <li><i class="fas fa-robot text-purple-500 mr-2"></i> AI-модули (цена, спрос, ассистент)</li>
+                                    <li><i class="fas fa-credit-card text-purple-500 mr-2"></i> Финансовые сервисы (факторинг)</li>
+                                    <li><i class="fas fa-globe text-purple-500 mr-2"></i> Выход на рынок СНГ</li>
+                                    <li><i class="fas fa-network-wired text-purple-500 mr-2"></i> Полноценная B2B2C-экосистема</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12 bg-white rounded-2xl p-8 shadow-lg">
+                            <h4 class="text-xl font-bold mb-4">Ключевые метрики проекта</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-blue-600">LTV/CAC > 3</div>
+                                    <div class="text-sm text-gray-600">Пожизненная ценность / стоимость привлечения</div>
+                                </div>
+                                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-blue-600">Churn < 3%</div>
+                                    <div class="text-sm text-gray-600">Ежемесячный отток клиентов</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты и CTA -->
+    <section id="contact" class="section-padding bg-white">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in">
+                    Станьте частью цифровой трансформации дистрибуции
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <div class="fade-in slide-in-left">
+                        <h3 class="text-2xl font-bold mb-6">Свяжитесь с нами для инвестиций</h3>
+                        
+                        <form id="investorForm" class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Ваше имя *</label>
+                                <input type="text" name="name" required class="form-input" placeholder="Александр Петров">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 mb-2">Email *</label>
+                                <input type="email" name="email" required class="form-input" placeholder="alex@example.com">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 mb-2">Компания *</label>
+                                <input type="text" name="company" required class="form-input" placeholder="Название компании или фонда">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 mb-2">Тип инвестора *</label>
+                                <select name="investor_type" required class="form-input">
+                                    <option value="">Выберите тип</option>
+                                    <option value="vc">Венчурный фонд</option>
+                                    <option value="angel">Бизнес-ангел</option>
+                                    <option value="corporate">Корпоративный инвестор</option>
+                                    <option value="private">Частный инвестор</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 mb-2">Сообщение</label>
+                                <textarea name="message" rows="4" class="form-input" placeholder="Расскажите о вашем интересе к проекту..."></textarea>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <input type="checkbox" id="privacy" name="privacy" required class="mt-1 mr-2">
+                                <label for="privacy" class="text-sm text-gray-600">
+                                    Я согласен на обработку персональных данных и принимаю <a href="#" class="text-blue-600 hover:underline">Политику конфиденциальности</a>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-lg">
+                                <i class="fas fa-paper-plane mr-2"></i>Отправить заявку
+                            </button>
+                            
+                            <div id="formMessage" class="hidden p-4 rounded-lg"></div>
+                        </form>
+                    </div>
+                    
+                    <div class="fade-in slide-in-right">
+                        <h3 class="text-2xl font-bold mb-6">Альтернативные способы связи</h3>
+                        
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                <div class="bg-blue-100 text-blue-800 rounded-lg p-3 mr-4">
+                                    <i class="fas fa-file-pdf text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">Полный White Paper</div>
+                                    <div class="text-gray-600 mb-2">Детальное описание проекта, рынка и финансовой модели (15 стр.)</div>
+                                    <button id="downloadFullWP" class="btn-primary px-4 py-2 rounded-lg text-sm">
+                                        <i class="fas fa-download mr-2"></i>Скачать PDF
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                <div class="bg-green-100 text-green-800 rounded-lg p-3 mr-4">
+                                    <i class="fas fa-presentation-screen text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">Pitch Deck для встречи</div>
+                                    <div class="text-gray-600 mb-2">Презентация для инвесторов (10 слайдов)</div>
+                                    <button id="requestPitchDeck" class="btn-accent px-4 py-2 rounded-lg text-sm">
+                                        <i class="fas fa-envelope mr-2"></i>Запросить на email
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                <div class="bg-purple-100 text-purple-800 rounded-lg p-3 mr-4">
+                                    <i class="fas fa-calendar-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">Демо-встреча с командой</div>
+                                    <div class="text-gray-600 mb-2">30-минутная онлайн-демонстрация платформы</div>
+                                    <button id="scheduleDemo" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition">
+                                        <i class="fas fa-video mr-2"></i>Забронировать демо
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <h4 class="font-bold text-lg mb-4">Контактная информация</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope text-blue-600 mr-3"></i>
+                                    <span>partner@chainhub.ru</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone text-blue-600 mr-3"></i>
+                                    <span>8 (800) XXX-XX-XX</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                                    <span>г. Москва, ул. Примерная, д. 1</span>
+                                </div>
+                                <div class="flex items-center mt-4">
+                                    <a href="#" class="text-gray-600 hover:text-blue-600 mr-4">
+                                        <i class="fab fa-linkedin text-xl"></i>
+                                    </a>
+                                    <a href="#" class="text-gray-600 hover:text-blue-600">
+                                        <i class="fab fa-telegram text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Футер -->
+                <footer class="border-t border-gray-200 pt-8 mt-8">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-4 md:mb-0">
+                            <div class="text-2xl font-bold text-blue-600">Nexus Supply Platform</div>
+                            <div class="text-gray-600 mt-2">Цифровая экосистема для автоматизации B2B2C</div>
+                        </div>
+                        
+                        <div class="flex flex-wrap justify-center space-x-6 mb-4 md:mb-0">
+                            <a href="#problem" class="text-gray-600 hover:text-blue-600 transition">Проблема</a>
+                            <a href="#solution" class="text-gray-600 hover:text-blue-600 transition">Решение</a>
+                            <a href="#market" class="text-gray-600 hover:text-blue-600 transition">Рынок</a>
+                            <a href="#ai" class="text-gray-600 hover:text-blue-600 transition">AI</a>
+                            <a href="#finance" class="text-gray-600 hover:text-blue-600 transition">Финансы</a>
+                            <a href="#team" class="text-gray-600 hover:text-blue-600 transition">Команда</a>
+                            <a href="#contact" class="text-gray-600 hover:text-blue-600 transition">Контакты</a>
+                        </div>
+                        
+                        <div class="text-gray-500 text-sm">
+                            © 2024 Nexus Supply Platform. Все права защищены.
+                            <a href="#" class="text-blue-600 hover:underline ml-2">Политика конфиденциальности</a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно для документов -->
+    <div id="documentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalContent">
+                <!-- Контент модального окна будет загружен динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script>
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация анимаций появления элементов
+            initScrollAnimations();
+            
+            // Инициализация графиков
+            initCharts();
+            
+            // Инициализация калькулятора рынка
+            initMarketCalculator();
+            
+            // Настройка обработчиков событий
+            setupEventListeners();
+            
+            // Инициализация мобильного меню
+            initMobileMenu();
+            
+            // Инициализация формы
+            initForm();
+        });
+        
+        // Анимации появления элементов при скролле
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const delay = element.getAttribute('data-delay') || 0;
+                        
+                        setTimeout(() => {
+                            element.classList.add('visible');
+                        }, delay * 1000);
+                    }
+                });
+            }, observerOptions);
+            
+            // Наблюдаем за всеми элементами с классами анимации
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Инициализация GSAP для более сложных анимаций
+            if (typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // Анимация для статистических карточек в герое
+                gsap.from('.stat-card', {
+                    scrollTrigger: {
+                        trigger: '#hero',
+                        start: 'top center',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    stagger: 0.2,
+                    duration: 1
+                });
+            }
+        }
+        
+        // Инициализация графиков Chart.js
+        function initCharts() {
+            // График TAM/SAM/SOM
+            const marketCtx = document.getElementById('marketChart')?.getContext('2d');
+            if (marketCtx) {
+                new Chart(marketCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['TAM (65.8 трлн ₽)', 'SAM (5.2 трлн ₽)', 'SOM (12.5 млрд ₽)'],
+                        datasets: [{
+                            data: [65.8, 5.2, 0.0125],
+                            backgroundColor: [
+                                'rgba(37, 99, 235, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(139, 92, 246, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgb(37, 99, 235)',
+                                'rgb(16, 185, 129)',
+                                'rgb(139, 92, 246)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: 'white',
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed === 65.8) {
+                                            label += '65.8 трлн ₽';
+                                        } else if (context.parsed === 5.2) {
+                                            label += '5.2 трлн ₽';
+                                        } else {
+                                            label += '12.5 млрд ₽';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // График роста выручки (ARR)
+            const revenueCtx = document.getElementById('revenueChart')?.getContext('2d');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2024', '2025', '2026', '2027'],
+                        datasets: [{
+                            label: 'ARR (млн ₽)',
+                            data: [0, 24, 96, 240],
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            borderColor: 'rgb(37, 99, 235)',
+                            borderWidth: 3,
+                            pointBackgroundColor: 'rgb(37, 99, 235)',
+                            pointBorderColor: 'white',
+                            pointBorderWidth: 2,
+                            pointRadius: 6,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `ARR: ${context.parsed.y} млн ₽`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Млн ₽'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + ' млн ₽';
+                                    }
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Год'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Калькулятор рынка
+        function initMarketCalculator() {
+            const industrySelect = document.getElementById('industrySelect');
+            const companiesRange = document.getElementById('companiesRange');
+            const companiesValue = document.getElementById('companiesValue');
+            const marketVolume = document.getElementById('marketVolume');
+            
+            if (!industrySelect || !companiesRange || !companiesValue || !marketVolume) return;
+            
+            // Базовая стоимость компании в отрасли (в млн ₽)
+            const industryValues = {
+                construction: 25,  // Строительство
+                plumbing: 15,      // Сантехника
+                industrial: 50,    // Промышленные товары
+                furniture: 20      // Мебель
+            };
+            
+            function updateMarketVolume() {
+                const industry = industrySelect.value;
+                const companies = parseInt(companiesRange.value);
+                
+                // Форматирование числа компаний
+                companiesValue.textContent = companies.toLocaleString('ru-RU');
+                
+                // Расчет объема рынка
+                const companyValue = industryValues[industry] || 25;
+                const volume = companies * companyValue;
+                
+                // Форматирование результата
+                let formattedVolume;
+                if (volume >= 1000) {
+                    formattedVolume = (volume / 1000).toFixed(1) + ' млрд ₽';
+                } else {
+                    formattedVolume = volume.toFixed(1) + ' млн ₽';
+                }
+                
+                marketVolume.textContent = formattedVolume;
+            }
+            
+            industrySelect.addEventListener('change', updateMarketVolume);
+            companiesRange.addEventListener('input', updateMarketVolume);
+            
+            // Инициализация начального значения
+            updateMarketVolume();
+        }
+        
+        // Мобильное меню
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenu');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            if (mobileMenuBtn && mobileNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileNav.classList.toggle('hidden');
+                });
+                
+                // Закрытие меню при клике на ссылку
+                mobileNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileNav.classList.add('hidden');
+                    });
+                });
+            }
+        }
+        
+        // Форма обратной связи
+        function initForm() {
+            const form = document.getElementById('investorForm');
+            const formMessage = document.getElementById('formMessage');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Показать индикатор загрузки
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<div class="loader"></div>';
+                    submitBtn.disabled = true;
+                    
+                    // Сбор данных формы
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData);
+                    
+                    // В реальном проекте здесь был бы AJAX-запрос к серверу
+                    // Для демо просто имитируем успешную отправку
+                    setTimeout(() => {
+                        // Показать сообщение об успехе
+                        formMessage.className = 'bg-green-100 border border-green-400 text-green-700 p-4 rounded-lg';
+                        formMessage.innerHTML = `
+                            <div class="font-bold">Заявка отправлена успешно!</div>
+                            <div>Мы свяжемся с вами в течение 24 часов.</div>
+                        `;
+                        formMessage.classList.remove('hidden');
+                        
+                        // Сбросить форму
+                        form.reset();
+                        
+                        // Восстановить кнопку
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // Прокрутить к сообщению
+                        formMessage.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Скрыть сообщение через 5 секунд
+                        setTimeout(() => {
+                            formMessage.classList.add('hidden');
+                        }, 5000);
+                    }, 1500);
+                });
+            }
+        }
+        
+        // Обработчики событий для кнопок и ссылок
+        function setupEventListeners() {
+            // Плавная прокрутка к якорям
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        // Учитываем фиксированную высоту header
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Обработчики для кнопок загрузки документов
+            const downloadButtons = [
+                'downloadWhitePaper', 'downloadWhitePaperMobile', 'downloadWP', 'downloadFullWP'
+            ];
+            
+            downloadButtons.forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        showModal('White Paper', `
+                            <h3 class="text-xl font-bold mb-4">Nexus Supply Platform: White Paper</h3>
+                            <p class="mb-4">Документ готов к скачиванию. Нажмите кнопку ниже, чтобы сохранить PDF-файл.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <div class="font-bold">Информация о документе:</div>
+                                <div>• Формат: PDF</div>
+                                <div>• Страниц: 15</div>
+                                <div>• Размер: ~2.5 MB</div>
+                                <div>• Версия: 2.0 (Декабрь 2024)</div>
+                            </div>
+                            <button id="mockDownload" class="btn-primary w-full py-3 rounded-lg font-medium">
+                                <i class="fas fa-download mr-2"></i>Скачать White Paper (PDF)
+                            </button>
+                        `);
+                    });
+                }
+            });
+            
+            // Обработчики для кнопок демо
+            const demoButtons = ['demoAccess', 'watchPresentation', 'requestDemo', 'scheduleDemo'];
+            demoButtons.forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        showModal('Демо-доступ', `
+                            <h3 class="text-xl font-bold mb-4">Запросить демо-доступ</h3>
+                            <p class="mb-4">Заполните форму ниже, и мы отправим вам доступ к демо-версии платформы или свяжемся для организации демонстрации.</p>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Ваше имя</label>
+                                    <input type="text" class="form-input" placeholder="Имя Фамилия">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Email</label>
+                                    <input type="email" class="form-input" placeholder="email@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Компания</label>
+                                    <input type="text" class="form-input" placeholder="Название компании">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Предпочтительный формат</label>
+                                    <select class="form-input">
+                                        <option>Онлайн-демонстрация (30 мин)</option>
+                                        <option>Доступ к демо-версии на 7 дней</option>
+                                        <option>Персональная презентация</option>
+                                    </select>
+                                </div>
+                                <button class="btn-primary w-full py-3 rounded-lg font-medium">
+                                    <i class="fas fa-paper-plane mr-2"></i>Отправить запрос
+                                </button>
+                            </div>
+                        `);
+                    });
+                }
+            });
+            
+            // Обработчик для кнопки Pitch Deck
+            const pitchDeckBtn = document.getElementById('requestPitchDeck');
+            if (pitchDeckBtn) {
+                pitchDeckBtn.addEventListener('click', function() {
+                    showModal('Pitch Deck', `
+                        <h3 class="text-xl font-bold mb-4">Запросить Pitch Deck</h3>
+                        <p class="mb-4">Мы отправим презентацию для инвесторов на ваш email. Пожалуйста, укажите адрес электронной почты.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Ваше имя</label>
+                                <input type="text" class="form-input" placeholder="Имя Фамилия">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" class="form-input" placeholder="email@example.com">
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <div class="font-bold">Информация о презентации:</div>
+                                <div>• Формат: PDF</div>
+                                <div>• Слайдов: 10</div>
+                                <div>• Размер: ~1.8 MB</div>
+                            </div>
+                            <button class="btn-accent w-full py-3 rounded-lg font-medium">
+                                <i class="fas fa-envelope mr-2"></i>Отправить Pitch Deck на email
+                            </button>
+                        </div>
+                    `);
+                });
+            }
+            
+            // Модальное окно
+            const modal = document.getElementById('documentModal');
+            const closeModalBtn = document.querySelector('.close-modal');
+            
+            if (modal && closeModalBtn) {
+                // Закрытие модального окна
+                closeModalBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+                
+                // Закрытие при клике вне окна
+                window.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+        }
+        
+        // Функция показа модального окна
+        function showModal(title, content) {
+            const modal = document.getElementById('documentModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            if (modal && modalContent) {
+                modalContent.innerHTML = content;
+                modal.style.display = 'flex';
+                
+                // Обработчик для кнопки скачивания в модальном окне
+                const mockDownloadBtn = document.getElementById('mockDownload');
+                if (mockDownloadBtn) {
+                    mockDownloadBtn.addEventListener('click', function() {
+                        alert('В реальном проекте здесь происходило бы скачивание PDF-файла. Для демо-версии это имитация.');
+                        modal.style.display = 'none';
+                    });
+                }
+            }
+        }
+        
+        // Анимация счетчиков (для ключевых метрик)
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current).toLocaleString('ru-RU');
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target.toLocaleString('ru-RU');
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+        
+        // Инициализация счетчиков при появлении в viewport
+        const counterObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        // Наблюдаем за секцией с метриками
+        const metricsSection = document.querySelector('#hero .stat-card');
+        if (metricsSection) {
+            counterObserver.observe(metricsSection);
+        }
+    </script>
+</body>
+</html>
